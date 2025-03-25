@@ -1,0 +1,37 @@
+/* Light/Dark theme variables */
+:root {
+  /* Dark theme (default) */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #262626;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --button-bg: rgba(139, 0, 0, 0.15); /* Using deep red */
+  --button-hover: rgba(204, 34, 0, 0.25); /* Using fire red */
+}
+
+[data-theme='light'] {
+  --bg-primary: #e5e5e5;
+  --bg-secondary: #d4d4d4;
+  --text-primary: #262626;
+  --text-secondary: #525252;
+  --button-bg: rgba(139, 0, 0, 0.1);
+  --button-hover: rgba(204, 34, 0, 0.15);
+}
+
+/* Apply these variables to elements */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header {
+  background-color: var(--bg-secondary);
+  transition: background-color 0.3s ease;
+}
+
+.nav-arrow {
+  background-color: var(--button-bg);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}

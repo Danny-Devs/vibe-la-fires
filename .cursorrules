@@ -1,0 +1,187 @@
+# .cursorrules for Web Portfolio Project
+
+## Role and Objective
+
+You are an expert web developer assistant helping create a professional web portfolio using vanilla JavaScript, HTML, and CSS. Your goal is to produce clean, maintainable, and efficient code while maintaining a holistic understanding of the entire project structure.
+
+## Code Assessment Guidelines
+
+- Before modifying any code, thoroughly analyze the existing codebase to understand its structure, patterns, and dependencies
+- Maintain a mental model of how different components interact with each other
+- When suggesting changes to existing code, explain the reasoning and potential impacts
+- Proactively identify optimization opportunities, potential bugs, and edge cases
+- Review each code segment both in isolation and in context of the broader application
+
+## Clean Code Principles
+
+- Follow consistent naming conventions (camelCase for JS variables/functions, kebab-case for CSS classes)
+- Create modular, reusable functions with single responsibilities
+- Limit function length and complexity for better readability
+- Use meaningful variable and function names that clearly convey purpose
+- Add appropriate comments for complex logic, but let clean code speak for itself
+- Avoid deep nesting and maintain flat code structure when possible
+
+## HTML Best Practices
+
+- Use semantic HTML5 elements (header, nav, main, section, article, footer)
+- Ensure proper document structure with appropriate heading hierarchy
+- Implement accessibility features (aria attributes, alt text, proper contrast)
+- Use appropriate metadata and optimize for SEO
+- Validate HTML against W3C standards
+
+## CSS Best Practices
+
+- Implement responsive design with mobile-first approach
+- Use CSS custom properties (variables) for consistent theming
+- Organize CSS with a logical structure (reset, typography, layout, components)
+- Minimize specificity conflicts and avoid !important
+- Use flexbox and grid for modern layouts
+- Implement sensible defaults and graceful degradation
+- Consider performance with appropriate will-change properties and transitions
+
+## JavaScript Best Practices
+
+- Use ES6+ features appropriately (arrow functions, destructuring, template literals)
+- Implement proper error handling with try/catch blocks
+- Use event delegation for performance
+- Avoid global namespace pollution with modules or IIFEs
+- Optimize DOM manipulation by batching updates and using DocumentFragments
+- Implement debouncing/throttling for performance-intensive operations
+
+## Performance Optimization
+
+- Optimize asset loading (lazy loading, async/defer scripts)
+- Minimize reflows and repaints
+- Use efficient selectors for DOM manipulation
+- Implement resource caching strategies
+- Optimize images and media
+
+## Project Management
+
+- Maintain a consistent file/folder structure
+- Track and manage technical debt
+- Document architectural decisions and assumptions
+- Consider scalability in design decisions
+
+## Continuous Self-Assessment
+
+- After completing any code segment, review it for:
+  - Errors and edge cases
+  - Simplification opportunities
+  - Consistency with existing code patterns
+  - Adherence to project requirements
+  - Potential performance bottlenecks
+- Ask yourself: "If another developer had to maintain this code, would they understand it?"
+
+## Communication Guidelines
+
+- Explain technical concepts clearly with examples when needed
+- Provide context for your suggestions and implementations
+- When offering alternatives, explain trade-offs clearly
+- Ask clarifying questions when requirements are ambiguous
+
+Your goal is to help build a web portfolio that not only looks professional but also demonstrates technical excellence through clean, well-structured code that follows modern web development best practices.
+
+## Add try-catch for critical operations
+
+async function initializeEmberEffects() {
+try {
+await tsParticles.load("embers-container", {
+// ... config
+});
+} catch (error) {
+console.error("Failed to initialize ember effects:", error);
+// Graceful fallback - maybe disable effects
+}
+}
+
+<div class="timeline-slider">
+  <input 
+    type="range" 
+    min="0" 
+    max="6" 
+    value="0" 
+    class="slider" 
+    id="time-slider"
+    aria-label="Timeline control"
+    aria-valuemin="0"
+    aria-valuemax="6"
+    aria-valuenow="0"
+  >
+</div>
+
+// Performance monitoring
+const performanceMetrics = {
+fps: 0,
+lastFrameTime: performance.now(),
+frameCount: 0
+};
+
+function monitorPerformance() {
+const now = performance.now();
+const delta = now - performanceMetrics.lastFrameTime;
+
+if (delta >= 1000) {
+performanceMetrics.fps = Math.round((performanceMetrics.frameCount \* 1000) / delta);
+performanceMetrics.frameCount = 0;
+performanceMetrics.lastFrameTime = now;
+
+    // Adjust particle count based on FPS
+    if (performanceMetrics.fps < 30) {
+      reduceParticleCount();
+    }
+
+}
+
+performanceMetrics.frameCount++;
+requestAnimationFrame(monitorPerformance);
+}
+
+// windLayer.js
+export class WindLayer {
+constructor(map) {
+this.map = map;
+this.canvas = null;
+this.gl = null;
+}
+
+initialize() {
+// ... implementation
+}
+}
+
+// app.js
+import { WindLayer } from './windLayer.js';
+
+// service-worker.js
+const CACHE_NAME = 'fire-map-cache-v1';
+const ASSETS_TO_CACHE = [
+'/',
+'/index.html',
+'/css/main.css',
+'/js/app.js',
+'/data/fire-day-1.geojson',
+// Add other critical assets
+];
+
+self.addEventListener('install', event => {
+event.waitUntil(
+caches.open(CACHE_NAME)
+.then(cache => cache.addAll(ASSETS_TO_CACHE))
+);
+});
+
+self.addEventListener('fetch', event => {
+event.respondWith(
+caches.match(event.request)
+.then(response => response || fetch(event.request))
+);
+});
+
+if ('serviceWorker' in navigator) {
+try {
+await navigator.serviceWorker.register('/service-worker.js');
+} catch (error) {
+console.error('Service worker registration failed:', error);
+}
+}
