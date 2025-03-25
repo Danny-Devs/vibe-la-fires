@@ -8,6 +8,9 @@ class Header extends HTMLElement {
       <header class="header">
         <a href="index.html" class="logo-link">
           <div class="logo">The Eaton Fire</div>
+          <div class="ember-3"></div>
+          <div class="ember-4"></div>
+          <div class="ember-5"></div>
         </a>
         <div class="nav-group">
           <a href="#about">About</a>

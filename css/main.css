@@ -232,6 +232,7 @@ body {
 
 .nav-group a:hover {
   background: var(--hover-color);
+  text-decoration: none;
 }
 
 /* Theme Toggle */
@@ -336,12 +337,13 @@ body {
   z-index: 1;
 }
 
-.start-button:hover::after {
-  opacity: 1;
-}
-
 .start-button:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-color: transparent;
+}
+
+.start-button:hover::after {
+  opacity: 1;
 }
 
 .start-button:active {
@@ -491,4 +493,99 @@ a:hover {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+/* Additional ember particles for the logo */
+.logo-link::after,
+.logo-link::before,
+.logo-link .ember-3,
+.logo-link .ember-4,
+.logo-link .ember-5 {
+  content: '';
+  position: absolute;
+  background: var(--logo-gradient);
+  border-radius: 50%;
+  z-index: 1;
+  opacity: 0;
+}
+
+.logo-link::after {
+  top: 45%;
+  left: 60%;
+  width: 3px;
+  height: 3px;
+}
+
+.logo-link:hover::after {
+  animation: ember-float 1.8s ease-out 0.2s infinite;
+}
+
+.logo-link::before {
+  top: 55%;
+  left: 45%;
+  width: 2px;
+  height: 2px;
+}
+
+.logo-link:hover::before {
+  animation: ember-float-alt 2.2s ease-out 0.7s infinite;
+}
+
+.logo-link .ember-3 {
+  top: 35%;
+  left: 55%;
+  width: 4px;
+  height: 4px;
+}
+
+.logo-link:hover .ember-3 {
+  animation: ember-float 2.5s ease-out 0.4s infinite;
+}
+
+.logo-link .ember-4 {
+  top: 60%;
+  left: 40%;
+  width: 2px;
+  height: 2px;
+}
+
+.logo-link:hover .ember-4 {
+  animation: ember-float-alt 1.9s ease-out 0.9s infinite;
+}
+
+.logo-link .ember-5 {
+  top: 50%;
+  left: 65%;
+  width: 3px;
+  height: 3px;
+}
+
+.logo-link:hover .ember-5 {
+  animation: ember-float 2.3s ease-out 0.6s infinite;
+}
+
+/* Additional ember animation */
+@keyframes ember-float-up {
+  0% {
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    width: 3px;
+    height: 3px;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(calc(-50% + 10px), calc(-50% - 60px)) rotate(15deg);
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+}
+
+/* Exception for links that should never show underline */
+.logo-link:hover,
+.start-button:hover,
+.nav-group a:hover {
+  text-decoration: none;
 }
