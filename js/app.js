@@ -120,30 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize first experience
   updateExperience();
 
-  // Theme Toggle
-  const themeToggle = document.getElementById('themeToggle');
-  const html = document.documentElement;
-
-  themeToggle.addEventListener('click', () => {
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    themeToggle.setAttribute('aria-label', 
-      isDark ? 'Switch to dark mode' : 'Switch to light mode'
-    );
-    
-    // Save preference
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-  });
-
-  // Load saved theme preference
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme) {
-    html.setAttribute('data-theme', savedTheme);
-    themeToggle.setAttribute('aria-label', 
-      savedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
-    );
-  }
-
   // Start experience button
   const startBtn = document.getElementById('startExperience');
   const splash = document.getElementById('splash');
