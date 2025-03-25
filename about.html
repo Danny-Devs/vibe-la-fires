@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - The Eaton Fire Experience</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <style>
+      .about-hero {
+        height: 40vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+        margin-bottom: 60px;
+      }
+
+      .about-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+      }
+
+      .about-hero-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        background-color: #333;
+      }
+
+      .about-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 20px;
+        color: white;
+      }
+
+      .about-hero-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .about-content {
+        max-width: 1400px;
+        margin: 0 auto 100px;
+        padding: 0 20px;
+        line-height: 1.7;
+      }
+
+      .about-section {
+        margin-bottom: 50px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .about-section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: var(--text-primary);
+      }
+
+      .about-section p {
+        margin-bottom: 20px;
+      }
+
+      .about-section a {
+        color: var(--text-accent);
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.3s ease;
+      }
+
+      .about-section a:hover {
+        border-color: var(--text-accent);
+      }
+
+      .dev-profile {
+        display: flex;
+        align-items: flex-start;
+        margin: 40px 0;
+        padding: 30px;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+      }
+
+      .dev-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-right: 30px;
+        background-color: #444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .dev-info h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: var(--text-primary);
+      }
+
+      .dev-title {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        margin-bottom: 15px;
+      }
+
+      .dev-bio {
+        line-height: 1.7;
+      }
+
+      .hackathon-logo {
+        width: 200px;
+        height: 100px;
+        background-color: #444;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 30px auto;
+      }
+
+      @media (max-width: 768px) {
+        .about-hero-title {
+          font-size: 2.5rem;
+        }
+
+        .dev-profile {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+
+        .dev-image {
+          margin-right: 0;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+    <script type="module" src="js/components/Header.js"></script>
+  </head>
+  <body>
+    <site-header></site-header>
+
+    <div class="about-hero">
+      <div class="placeholder about-hero-image">
+        <div class="placeholder-label">ABOUT HEADER IMAGE</div>
+      </div>
+      <div class="about-hero-content">
+        <h1 class="about-hero-title">About This Project</h1>
+      </div>
+    </div>
+
+    <div class="about-content">
+      <div class="about-section">
+        <h2>The Eaton Fire Experience</h2>
+        <p>
+          This interactive web experience was created to document and
+          memorialize the significant impact of the Eaton Fire on Altadena and
+          the surrounding Los Angeles communities. By combining data
+          visualization, immersive storytelling, and personal accounts, we aim
+          to educate the public about wildfire dynamics while honoring those
+          affected by this devastating event.
+        </p>
+        <p>
+          Our goal is to transform complex data into an emotionally resonant
+          experience that helps visitors understand not only what happened
+          during the fire, but also the human stories behind the statistics. We
+          hope this project serves as both a memorial and an educational
+          resource that contributes to community resilience and wildfire
+          awareness.
+        </p>
+      </div>
+
+      <div class="about-section">
+        <h2>MIT Reality Hack: LA Fires</h2>
+        <div class="hackathon-logo">
+          <div class="placeholder-label">MIT REALITY HACK LOGO</div>
+        </div>
+        <p>
+          This project was conceptualized and developed during the MIT Reality
+          Hack hackathon, specifically at the Los Angeles satellite location.
+          The hackathon brought together developers, designers, and storytellers
+          to create mixed reality experiences that address real-world
+          challenges.
+        </p>
+        <p>
+          Our team chose to focus on the Los Angeles wildfires, recognizing the
+          profound impact these events have on local communities and the need
+          for innovative approaches to disaster documentation, education, and
+          memorialization. The project evolved from concept to prototype during
+          an intensive development sprint, with continued refinement afterward
+          to create the experience you see today.
+        </p>
+      </div>
+
+      <div class="about-section">
+        <h2>The Developer</h2>
+        <div class="dev-profile">
+          <div class="dev-image">
+            <div class="placeholder-label">DA</div>
+          </div>
+          <div class="dev-info">
+            <h3>Daniel Ahn</h3>
+            <p class="dev-title">Full Stack Developer & XR Engineer</p>
+            <p class="dev-bio">
+              Daniel Ahn is a developer with a passion for creating immersive
+              digital experiences that bridge technology and storytelling. With
+              expertise in web development, data visualization, and mixed
+              reality, Daniel focuses on projects that have meaningful social
+              impact. Based in Los Angeles, his work often explores the
+              intersection of environmental concerns, community resilience, and
+              interactive technology.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-section">
+        <h2>Methodology & Data Sources</h2>
+        <p>
+          The information presented in this experience was compiled from
+          multiple authoritative sources, including official reports from the
+          Los Angeles Fire Department, CAL FIRE, and the National Weather
+          Service. Satellite imagery and progression data were obtained from
+          NASA Earth Observatory and NOAA.
+        </p>
+        <p>
+          Personal testimonies were collected through interviews with residents,
+          first responders, and community leaders, with permission granted for
+          their inclusion in this memorial. All participants were provided the
+          opportunity to review their contributions before publication.
+        </p>
+        <p>
+          For a comprehensive list of data sources and reference materials used
+          in the creation of this experience, please visit our
+          <a href="resources.html">Resources</a> page.
+        </p>
+      </div>
+
+      <div class="about-section">
+        <h2>Contact & Feedback</h2>
+        <p>
+          We welcome your thoughts, corrections, or additional information that
+          could enhance this experience. If you were affected by the Eaton Fire
+          and would like to contribute your story, or if you have technical
+          feedback about the site, please contact us at:
+        </p>
+        <p>
+          <a href="mailto:contact@eatonfireexperience.org"
+            >contact@eatonfireexperience.org</a
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resources - The Eaton Fire Experience</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <style>
+      .resources-hero {
+        height: 30vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+        margin-bottom: 60px;
+      }
+
+      .resources-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 1;
+      }
+
+      .resources-hero-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        background-color: #333;
+      }
+
+      .resources-hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 20px;
+        color: white;
+      }
+
+      .resources-hero-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .resources-content {
+        max-width: 1400px;
+        margin: 0 auto 100px;
+        padding: 0 20px;
+      }
+
+      .resources-intro {
+        margin-bottom: 50px;
+        line-height: 1.7;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .resources-intro h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: var(--text-primary);
+      }
+
+      .resources-intro p {
+        margin-bottom: 20px;
+      }
+
+      .resources-categories {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 40px;
+      }
+
+      .resource-category-btn {
+        padding: 8px 20px;
+        border: 1px solid var(--border-color);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        border-radius: 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .resource-category-btn:hover {
+        background: var(--bg-secondary);
+      }
+
+      .resource-category-btn.active {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+        border-color: var(--text-primary);
+      }
+
+      .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .resource-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: var(--bg-secondary);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .resource-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .resource-image {
+        height: 160px;
+        background-color: #444;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .resource-content {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .resource-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .resource-source {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+
+      .resource-description {
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+        line-height: 1.5;
+        flex-grow: 1;
+      }
+
+      .resource-link {
+        display: inline-block;
+        padding: 8px 16px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        border: 1px solid var(--text-primary);
+        border-radius: 20px;
+        text-decoration: none;
+        text-align: center;
+        transition: background 0.3s ease, color 0.3s ease;
+        align-self: flex-start;
+      }
+
+      .resource-link:hover {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+      }
+
+      .resource-tag {
+        display: inline-block;
+        padding: 4px 10px;
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        color: var(--text-secondary);
+      }
+
+      @media (max-width: 768px) {
+        .resources-hero-title {
+          font-size: 2.5rem;
+        }
+
+        .resources-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <script type="module" src="js/components/Header.js"></script>
+  </head>
+  <body>
+    <site-header></site-header>
+
+    <div class="resources-hero">
+      <div class="placeholder resources-hero-image">
+        <div class="placeholder-label">RESOURCES HEADER IMAGE</div>
+      </div>
+      <div class="resources-hero-content">
+        <h1 class="resources-hero-title">Fire Resources</h1>
+      </div>
+    </div>
+
+    <div class="resources-content">
+      <div class="resources-intro">
+        <h2>Curated Resources on the Los Angeles Fires</h2>
+        <p>
+          We've gathered high-quality resources to help you understand, prepare
+          for, and recover from wildfires like the Eaton Fire. These carefully
+          selected materials include official reports, research papers, personal
+          accounts, and support services related to the Los Angeles fires that
+          affected Altadena and the Pacific Palisades in 2025.
+        </p>
+      </div>
+
+      <div class="resources-categories">
+        <button class="resource-category-btn active" data-category="all">
+          All Resources
+        </button>
+        <button class="resource-category-btn" data-category="official">
+          Official Reports
+        </button>
+        <button class="resource-category-btn" data-category="research">
+          Research & Analysis
+        </button>
+        <button class="resource-category-btn" data-category="community">
+          Community Support
+        </button>
+        <button class="resource-category-btn" data-category="preparedness">
+          Preparedness
+        </button>
+        <button class="resource-category-btn" data-category="recovery">
+          Recovery
+        </button>
+      </div>
+
+      <div class="resources-grid">
+        <!-- Official Reports -->
+        <div class="resource-card" data-categories="official">
+          <div class="resource-image">
+            <div class="placeholder-label">LAFD REPORT COVER</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">Official Eaton Fire Incident Report</h3>
+            <p class="resource-source">Los Angeles Fire Department</p>
+            <p class="resource-description">
+              Comprehensive official report on the Eaton Fire including ignition
+              source, spread patterns, containment efforts, and damage
+              assessment.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Official</span>
+              <span class="resource-tag">Report</span>
+            </div>
+            <a href="#" class="resource-link">View Report</a>
+          </div>
+        </div>
+
+        <div class="resource-card" data-categories="official">
+          <div class="resource-image">
+            <div class="placeholder-label">CAL FIRE LOGO</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">
+              Altadena-Palisades Fires: Economic Impact Assessment
+            </h3>
+            <p class="resource-source">
+              California Department of Forestry and Fire Protection (CAL FIRE)
+            </p>
+            <p class="resource-description">
+              Detailed analysis of the economic impact of the Los Angeles fires
+              on local communities, infrastructure, and the state economy.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Official</span>
+              <span class="resource-tag">Economic</span>
+            </div>
+            <a href="#" class="resource-link">View Assessment</a>
+          </div>
+        </div>
+
+        <!-- Research & Analysis -->
+        <div class="resource-card" data-categories="research">
+          <div class="resource-image">
+            <div class="placeholder-label">UCLA RESEARCH PAPER</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">
+              Climate Change and the Los Angeles Fire Season of 2025
+            </h3>
+            <p class="resource-source">
+              UCLA Institute of the Environment and Sustainability
+            </p>
+            <p class="resource-description">
+              Research paper examining the connection between climate change
+              patterns and the unprecedented intensity of the 2025 Los Angeles
+              fire season.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Research</span>
+              <span class="resource-tag">Climate</span>
+            </div>
+            <a href="#" class="resource-link">Read Paper</a>
+          </div>
+        </div>
+
+        <div class="resource-card" data-categories="research">
+          <div class="resource-image">
+            <div class="placeholder-label">SATELLITE IMAGERY</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">
+              Satellite Imagery Analysis: Eaton Fire Progression
+            </h3>
+            <p class="resource-source">NASA Earth Observatory</p>
+            <p class="resource-description">
+              Time-series satellite imagery showing the progression of the Eaton
+              Fire with expert analysis on spread patterns and environmental
+              factors.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Research</span>
+              <span class="resource-tag">Imagery</span>
+            </div>
+            <a href="#" class="resource-link">View Analysis</a>
+          </div>
+        </div>
+
+        <!-- Community Support -->
+        <div class="resource-card" data-categories="community">
+          <div class="resource-image">
+            <div class="placeholder-label">COMMUNITY CENTER</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">
+              Altadena Rebuilds: Community Support Network
+            </h3>
+            <p class="resource-source">Altadena Community Foundation</p>
+            <p class="resource-description">
+              Network connecting fire survivors with volunteers, donors, and
+              support services to assist with rebuilding efforts and community
+              recovery.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Community</span>
+              <span class="resource-tag">Support</span>
+            </div>
+            <a href="#" class="resource-link">Get Support</a>
+          </div>
+        </div>
+
+        <div class="resource-card" data-categories="community">
+          <div class="resource-image">
+            <div class="placeholder-label">MENTAL HEALTH RESOURCES</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">
+              Coping with Disaster: Mental Health Resources
+            </h3>
+            <p class="resource-source">
+              Los Angeles County Department of Mental Health
+            </p>
+            <p class="resource-description">
+              Free mental health resources specifically designed for individuals
+              and families affected by the Los Angeles fires.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Community</span>
+              <span class="resource-tag">Mental Health</span>
+            </div>
+            <a href="#" class="resource-link">Access Resources</a>
+          </div>
+        </div>
+
+        <!-- Preparedness -->
+        <div class="resource-card" data-categories="preparedness">
+          <div class="resource-image">
+            <div class="placeholder-label">EVACUATION PLAN</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">
+              Los Angeles Wildfire Evacuation Guide
+            </h3>
+            <p class="resource-source">LA County Fire Department</p>
+            <p class="resource-description">
+              Comprehensive guide to creating family evacuation plans, emergency
+              supply kits, and understanding evacuation notifications for LA
+              County residents.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Preparedness</span>
+              <span class="resource-tag">Guide</span>
+            </div>
+            <a href="#" class="resource-link">Download Guide</a>
+          </div>
+        </div>
+
+        <div class="resource-card" data-categories="preparedness">
+          <div class="resource-image">
+            <div class="placeholder-label">HOME HARDENING</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">
+              Home Hardening: Protecting Your Property from Wildfires
+            </h3>
+            <p class="resource-source">California Fire Safe Council</p>
+            <p class="resource-description">
+              Detailed guidance on home hardening techniques to increase your
+              property's resilience to wildfires, based on lessons learned from
+              the Eaton Fire.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Preparedness</span>
+              <span class="resource-tag">Property</span>
+            </div>
+            <a href="#" class="resource-link">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Recovery -->
+        <div class="resource-card" data-categories="recovery">
+          <div class="resource-image">
+            <div class="placeholder-label">FEMA LOGO</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">
+              Disaster Assistance for Los Angeles Fire Survivors
+            </h3>
+            <p class="resource-source">
+              Federal Emergency Management Agency (FEMA)
+            </p>
+            <p class="resource-description">
+              Guide to available federal assistance programs for individuals and
+              businesses affected by the Los Angeles fires.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Recovery</span>
+              <span class="resource-tag">Financial</span>
+            </div>
+            <a href="#" class="resource-link">Apply for Assistance</a>
+          </div>
+        </div>
+
+        <div class="resource-card" data-categories="recovery">
+          <div class="resource-image">
+            <div class="placeholder-label">ECOLOGICAL RECOVERY</div>
+          </div>
+          <div class="resource-content">
+            <h3 class="resource-title">Ecological Recovery After Wildfire</h3>
+            <p class="resource-source">California Native Plant Society</p>
+            <p class="resource-description">
+              Resources on the ecological recovery process after wildfires,
+              including native plant regeneration, erosion control, and wildlife
+              habitat restoration.
+            </p>
+            <div style="margin-bottom: 15px">
+              <span class="resource-tag">Recovery</span>
+              <span class="resource-tag">Ecological</span>
+            </div>
+            <a href="#" class="resource-link">Explore Resources</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const categoryButtons = document.querySelectorAll(
+          '.resource-category-btn'
+        );
+        const resourceCards = document.querySelectorAll('.resource-card');
+
+        // Add click event to category buttons
+        categoryButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            categoryButtons.forEach(btn => btn.classList.remove('active'));
+
+            // Add active class to clicked button
+            button.classList.add('active');
+
+            // Get selected category
+            const selectedCategory = button.dataset.category;
+
+            // Show/hide cards based on category
+            resourceCards.forEach(card => {
+              if (
+                selectedCategory === 'all' ||
+                card.dataset.categories.includes(selectedCategory)
+              ) {
+                card.style.display = 'flex';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -14,7 +14,7 @@
     #cc2200 60%,
     #ff6600 100%
   );
-  --header-bg: #d9d9d9; /* Darker header background */
+  --header-bg: #c9c9c9; /* Darker header background */
 }
 
 /* Dark theme */
@@ -26,7 +26,7 @@
   --text-secondary: #a3a3a3;
   --border-color: rgba(255, 255, 255, 0.1);
   --hover-color: rgba(255, 255, 255, 0.1);
-  --header-bg: #2e2e2e; /* Same as bg-secondary for dark mode */
+  --header-bg: #393939; /* Lighter header for dark mode */
   --placeholder-text: #333333; /* Darker text for placeholders in dark mode */
 }
 
@@ -477,7 +477,9 @@ a:hover {
 
 /* Exception for logo and start button links */
 .logo-link:hover,
-.start-button:hover {
+.start-button:hover,
+.nav-group a:hover,
+.hero-cta:hover {
   text-decoration: none;
 }
 
@@ -586,13 +588,6 @@ a:hover {
   }
 }
 
-/* Exception for links that should never show underline */
-.logo-link:hover,
-.start-button:hover,
-.nav-group a:hover {
-  text-decoration: none;
-}
-
 /* Mockup specific styles (adding these at the bottom of the file) */
 .placeholder-label {
   color: var(--placeholder-text, #333333); /* Use the variable with fallback */
@@ -600,4 +595,428 @@ a:hover {
 
 [data-theme='dark'] .placeholder-label {
   color: var(--placeholder-text); /* Use dark mode placeholder text color */
+}
+
+/* Share Button */
+.share-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.share-btn:hover {
+  background: var(--hover-color);
+}
+
+.share-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.share-btn:hover svg {
+  transform: translateY(-2px);
+}
+
+/* Share Modal */
+.share-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85); /* Darker overlay */
+  backdrop-filter: blur(4px); /* Add blur effect to background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.share-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.share-modal-content {
+  background: var(--bg-primary);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px; /* Reduced from 500px */
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.share-modal.active .share-modal-content {
+  transform: translateY(0);
+}
+
+.share-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.share-modal-header h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.close-modal-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.close-modal-btn:hover {
+  background: var(--hover-color);
+  color: var(--text-primary);
+}
+
+.share-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 12px; /* Reduced from 15px */
+  margin: 20px 0; /* Reduced from 25px 0 */
+}
+
+.share-option {
+  flex: 1;
+  min-width: 100px; /* Reduced from 120px */
+  padding: 12px 8px; /* Reduced from 15px 10px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease,
+    background-color 0.3s ease;
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.share-option::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.share-option:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.share-option:hover::before {
+  opacity: 1;
+}
+
+.share-option svg {
+  height: 28px;
+  width: 28px;
+  z-index: 2;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.share-option:hover svg {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.share-option::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.share-option:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.share-option span {
+  position: relative;
+  z-index: 2;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+}
+
+.share-option:hover span {
+  transform: translateY(2px);
+}
+
+/* Platform-specific styling */
+.share-option.instagram {
+  color: #e1306c;
+}
+
+.share-option.instagram:hover {
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  color: white;
+}
+
+.share-option.tiktok {
+  color: #000000;
+}
+
+[data-theme='dark'] .share-option.tiktok {
+  color: #ffffff; /* White TikTok icon in dark mode for better contrast */
+}
+
+.share-option.tiktok:hover {
+  background: linear-gradient(45deg, #00f2ea, #ff0050);
+  color: white;
+}
+
+.share-option.facebook {
+  color: #1877f2;
+}
+
+.share-option.facebook:hover {
+  background: #1877f2;
+  color: white;
+}
+
+.share-option.twitter {
+  color: #1da1f2;
+}
+
+.share-option.twitter:hover {
+  background: #1da1f2;
+  color: white;
+}
+
+.share-option.email {
+  color: var(--text-primary);
+}
+
+.share-option.email:hover {
+  background: linear-gradient(135deg, #ff4500, #ff8c00);
+  color: white;
+}
+
+.share-link {
+  display: flex;
+  margin-top: 20px;
+}
+
+.copy-link-btn {
+  width: 100%;
+  padding: 12px 15px; /* Reduced from 15px 20px */
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.copy-link-btn:hover {
+  background: var(--text-accent, #ff6600);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
+}
+
+.copy-link-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.copy-link-btn:hover::before {
+  opacity: 1;
+}
+
+/* Content width adjustments for desktop */
+.resources-content,
+.about-content,
+.share-modal-content,
+.content-area {
+  width: 85%; /* Wider content area */
+  max-width: 1400px; /* Increase max-width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Resources page specific adjustments */
+.resources-intro {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Share Modal */
+.share-option.tiktok {
+  color: #000000;
+}
+
+[data-theme='dark'] .share-option.tiktok {
+  color: #ffffff; /* White TikTok icon in dark mode for better contrast */
+}
+
+/* Share option animations */
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  }
+}
+
+@keyframes float-icon {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.2);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.share-option:hover svg {
+  animation: float-icon 0.8s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.share-option:hover {
+  animation: pulse-glow 1.5s infinite;
+}
+
+/* Copy button success state */
+.copy-link-btn.success {
+  background: #4caf50; /* Green background */
+  color: white;
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+/* Instagram special effects */
+.share-option.instagram::before {
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.share-option.instagram:hover::before {
+  opacity: 0.15;
+}
+
+/* TikTok special effects */
+.share-option.tiktok::before {
+  background: linear-gradient(45deg, #00f2ea, #ff0050);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.share-option.tiktok:hover::before {
+  opacity: 0.15;
+}
+
+/* Facebook special effects */
+.share-option.facebook::before {
+  background: radial-gradient(circle at 30% 107%, #3b5998 0%, #1877f2 90%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.share-option.facebook:hover::before {
+  opacity: 0.15;
+}
+
+/* Twitter special effects */
+.share-option.twitter::before {
+  background: radial-gradient(circle at 30% 107%, #1da1f2 0%, #0084b4 90%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.share-option.twitter:hover::before {
+  opacity: 0.15;
+}
+
+/* Email special effects */
+.share-option.email::before {
+  background: linear-gradient(135deg, #ff4500, #ff8c00);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.share-option.email:hover::before {
+  opacity: 0.15;
 }
