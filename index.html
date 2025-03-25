@@ -69,12 +69,172 @@
         font-weight: 600;
         border-radius: 30px;
         text-decoration: none;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: color 0.8s ease,
+          transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.8s ease;
+      }
+
+      .hero-cta::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #ff4500, #ff8c00);
+        opacity: 0;
+        z-index: -1;
+        transition: opacity 1s ease;
+      }
+
+      .hero-cta::after {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        background: linear-gradient(
+          45deg,
+          rgba(255, 69, 0, 0.6),
+          transparent,
+          rgba(255, 140, 0, 0.6)
+        );
+        opacity: 0;
+        z-index: -2;
+        border-radius: 34px;
+        filter: blur(8px);
+        transition: opacity 0.8s ease;
       }
 
       .hero-cta:hover {
+        color: white;
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 10px 30px rgba(255, 69, 0, 0.3);
+      }
+
+      .hero-cta:hover::before {
+        opacity: 1;
+        animation: fire-flicker 3s infinite;
+      }
+
+      .hero-cta:hover::after {
+        opacity: 1;
+        animation: glow-pulse 4s infinite;
+      }
+
+      /* Fire flicker animation */
+      @keyframes fire-flicker {
+        0% {
+          opacity: 0.85;
+        }
+        10% {
+          opacity: 0.95;
+        }
+        20% {
+          opacity: 0.9;
+        }
+        30% {
+          opacity: 1;
+        }
+        40% {
+          opacity: 0.92;
+        }
+        50% {
+          opacity: 0.98;
+        }
+        60% {
+          opacity: 0.9;
+        }
+        70% {
+          opacity: 0.97;
+        }
+        80% {
+          opacity: 0.95;
+        }
+        90% {
+          opacity: 0.98;
+        }
+        100% {
+          opacity: 0.92;
+        }
+      }
+
+      /* Ember particles that appear on hover */
+      .hero-cta:hover::before {
+        opacity: 1;
+      }
+
+      /* Adding ember particles */
+      .hero-cta:hover .ember,
+      .hero-cta .ember {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: rgba(255, 200, 0, 0.8);
+        box-shadow: 0 0 6px 2px rgba(255, 100, 0, 0.6);
+        opacity: 0;
+        z-index: 2;
+      }
+
+      .hero-cta:hover .ember {
+        animation: float-up 2s ease-out forwards;
+      }
+
+      .hero-cta .ember:nth-child(2) {
+        left: 30%;
+        bottom: 10%;
+        animation-delay: 0.2s;
+      }
+
+      .hero-cta .ember:nth-child(3) {
+        left: 50%;
+        bottom: 10%;
+        animation-delay: 0.8s;
+      }
+
+      .hero-cta .ember:nth-child(4) {
+        left: 70%;
+        bottom: 10%;
+        animation-delay: 0.4s;
+      }
+
+      @keyframes float-up {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        70% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-55px) scale(0);
+          opacity: 0;
+        }
+      }
+
+      @keyframes glow-pulse {
+        0% {
+          opacity: 0.4;
+          filter: blur(8px);
+          box-shadow: 0 0 15px 3px rgba(255, 69, 0, 0.2);
+        }
+        50% {
+          opacity: 0.7;
+          filter: blur(12px);
+          box-shadow: 0 0 25px 5px rgba(255, 69, 0, 0.3);
+        }
+        100% {
+          opacity: 0.4;
+          filter: blur(8px);
+          box-shadow: 0 0 15px 3px rgba(255, 69, 0, 0.2);
+        }
       }
 
       .experience-cards {
@@ -210,10 +370,16 @@
       <div class="hero-content">
         <h1 class="hero-title">The Eaton Fire Experience</h1>
         <p class="hero-subtitle">
-          A powerful interactive journey through one of California's most
-          impactful wildfires
+          Documenting California's costliest wildfire — a cyclical tragedy of
+          unfortunate destruction with complex questions of responsibility and
+          prevention
         </p>
-        <a href="experience1.html" class="hero-cta">Begin Your Journey</a>
+        <a href="experience1.html" class="hero-cta">
+          Begin Your Journey
+          <span class="ember"></span>
+          <span class="ember"></span>
+          <span class="ember"></span>
+        </a>
       </div>
     </div>
 

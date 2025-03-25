@@ -98,54 +98,130 @@
         font-weight: 600;
       }
 
-      /* Timeline specific mockup */
+      /* Timeline specific mockup - updated with temporal focus */
       .timeline-container {
         display: flex;
         flex-direction: column;
         gap: 20px;
       }
 
-      .timeline-slider {
+      .timeline-visualization {
         position: relative;
-        height: 50px;
+        flex-grow: 1;
+        margin-bottom: 20px;
+        background-color: rgba(200, 200, 200, 0.1);
+        border-radius: 8px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .time-indicator {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-size: 1.2em;
+        font-weight: bold;
+        z-index: 10;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .temporal-timeline {
+        width: 100%;
+        position: relative;
+        padding: 15px 0;
         margin-bottom: 30px;
       }
 
-      .timeline-slider-bar {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
+      .timeline-track {
         height: 4px;
         background: var(--border-color);
-        transform: translateY(-50%);
-      }
-
-      .timeline-markers {
-        display: flex;
-        justify-content: space-between;
-        height: 100%;
         position: relative;
+        border-radius: 2px;
       }
 
-      .timeline-marker {
+      .timeline-progress {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        background: var(--logo-gradient);
+        border-radius: 2px;
+        width: 0%; /* Will be set by JS */
+      }
+
+      .time-markers {
+        display: flex;
+        position: relative;
+        margin-top: 10px;
+      }
+
+      .time-marker {
+        position: absolute;
+        transform: translateX(-50%);
         display: flex;
         flex-direction: column;
         align-items: center;
-        position: relative;
-        width: 40px;
-        margin-top: 20px;
       }
 
-      .timeline-marker::before {
-        content: '';
-        position: absolute;
-        top: -20px;
-        width: 10px;
-        height: 10px;
+      .marker-line {
+        width: 2px;
+        height: 8px;
+        background-color: var(--border-color);
+        margin-bottom: 5px;
+      }
+
+      .marker-label {
+        font-size: 0.75em;
+        color: var(--text-secondary);
+        white-space: nowrap;
+      }
+
+      .time-marker.active .marker-line {
+        background-color: var(--text-primary);
+        height: 12px;
+      }
+
+      .time-marker.active .marker-label {
+        color: var(--text-primary);
+        font-weight: bold;
+      }
+
+      .timeline-controls {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .timeline-btn {
+        background: none;
+        border: 1px solid var(--border-color);
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.2s ease;
+      }
+
+      .timeline-btn:hover {
         background: var(--bg-secondary);
-        border: 2px solid var(--border-color);
-        border-radius: 50%;
+      }
+
+      .timeline-btn.play {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+      }
+
+      .timeline-btn.play:hover {
+        background: var(--text-primary);
+        opacity: 0.9;
       }
     </style>
     <script type="module" src="js/components/Header.js"></script>
@@ -154,49 +230,109 @@
   <body>
     <site-header></site-header>
 
-    <div class="content-area">
+    <div
+      class="content-area"
+      style="height: calc(100vh - var(--header-height)); overflow: hidden"
+    >
       <div class="stage" id="stage">
         <!-- Stage content using placeholders -->
-        <h1>Experience 2: Timeline</h1>
+        <div
+          class="timeline-container"
+          style="display: flex; flex-direction: column; height: 100%"
+        >
+          <h2 style="margin-bottom: 20px">Timeline: The Eaton Fire</h2>
 
-        <div class="timeline-container">
-          <div class="timeline-slider">
-            <div class="timeline-slider-bar"></div>
-            <div class="timeline-markers">
-              <div class="timeline-marker">
-                <span>Day 1</span>
-              </div>
-              <div class="timeline-marker">
-                <span>Day 2</span>
-              </div>
-              <div class="timeline-marker">
-                <span>Day 3</span>
-              </div>
-              <div class="timeline-marker">
-                <span>Day 4</span>
-              </div>
-              <div class="timeline-marker">
-                <span>Day 5</span>
-              </div>
-              <div class="timeline-marker">
-                <span>Day 6</span>
-              </div>
-              <div class="timeline-marker">
-                <span>Day 7</span>
-              </div>
+          <div
+            class="timeline-visualization"
+            style="
+              position: relative;
+              flex-grow: 1;
+              margin-bottom: 20px;
+              background-color: rgba(200, 200, 200, 0.1);
+              border-radius: 8px;
+              padding: 20px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            <div class="placeholder-label">FIRE SPREAD VISUALIZATION</div>
+
+            <div
+              class="timeline-day-title"
+              style="
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                font-size: 1.4em;
+                font-weight: bold;
+              "
+            >
+              Day 1: Ignition
             </div>
           </div>
 
-          <div class="placeholder image-placeholder">
-            <div class="placeholder-label">DAY VISUALIZATION</div>
+          <div class="temporal-timeline">
+            <div class="timeline-track">
+              <div class="timeline-progress" id="timeline-progress"></div>
+            </div>
+            <div class="time-markers" id="time-markers">
+              <!-- These will be dynamically populated by JavaScript -->
+            </div>
           </div>
 
-          <div class="placeholder">
-            <div class="placeholder-label">DAY DETAILS</div>
+          <div class="timeline-controls">
+            <button class="timeline-btn" id="prev-time-btn">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="11 17 6 12 11 7"></polyline>
+              </svg>
+              Previous
+            </button>
+            <button class="timeline-btn play" id="play-btn">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Play
+            </button>
+            <button class="timeline-btn" id="next-time-btn">
+              Next
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <polyline points="13 17 18 12 13 7"></polyline>
+              </svg>
+            </button>
           </div>
 
-          <div class="placeholder">
-            <div class="placeholder-label">STATISTICS FOR SELECTED DAY</div>
+          <div
+            class="timeline-details"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+          >
+            <div class="placeholder" style="height: 160px">
+              <div class="placeholder-label">DAY DETAILS</div>
+            </div>
+            <div class="placeholder" style="height: 160px">
+              <div class="placeholder-label">FIRE STATISTICS</div>
+            </div>
           </div>
         </div>
       </div>
@@ -205,24 +341,68 @@
         <div class="sidebar-content" id="sidebar">
           <h2>Timeline Overview</h2>
 
-          <div class="placeholder">
-            <div class="placeholder-label">DATE RANGE</div>
+          <div class="timeline-overview" style="margin-bottom: 20px">
+            <p style="margin-bottom: 15px; line-height: 1.6">
+              The Eaton Fire burned for 12 days, consuming 27,812 acres and
+              destroying 146 structures.
+            </p>
+            <p style="line-height: 1.6">
+              Follow the daily progression using the timeline slider to see how
+              weather conditions, firefighting tactics, and community response
+              evolved.
+            </p>
           </div>
 
-          <div class="placeholder">
-            <div class="placeholder-label">SUMMARY</div>
+          <div
+            class="timeline-day active"
+            style="
+              padding: 10px;
+              border-left: 3px solid var(--text-primary);
+              margin-bottom: 10px;
+              background: rgba(255, 255, 255, 0.05);
+            "
+          >
+            <h3>Day 1: Ignition</h3>
+            <p style="font-size: 0.9em; color: var(--text-secondary)">
+              Fire starts from downed power line during high winds
+            </p>
           </div>
 
-          <div class="placeholder">
-            <div class="placeholder-label">KEY EVENTS</div>
+          <div
+            class="timeline-day"
+            style="
+              padding: 10px;
+              border-left: 3px solid transparent;
+              margin-bottom: 10px;
+            "
+          >
+            <h3>Day 2: Initial Spread</h3>
+            <p style="font-size: 0.9em; color: var(--text-secondary)">
+              Fire grows to 3,500 acres with 0% containment
+            </p>
+          </div>
+
+          <div
+            class="timeline-day"
+            style="
+              padding: 10px;
+              border-left: 3px solid transparent;
+              margin-bottom: 10px;
+            "
+          >
+            <h3>Day 3: Evacuation Orders</h3>
+            <p style="font-size: 0.9em; color: var(--text-secondary)">
+              First mandatory evacuations issued
+            </p>
+          </div>
+
+          <div class="placeholder" style="height: 120px; margin-top: 30px">
+            <div class="placeholder-label">KEY RESOURCES</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="progress-indicator">
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
       </div>
       <div class="progress-labels">
         <span>The Spark</span>
@@ -257,5 +437,249 @@
         </svg>
       </button>
     </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Define our logarithmic timeline with important events
+        const timePoints = [
+          {
+            hour: 0,
+            label: 'Start',
+            description: 'Fire ignition from downed power line'
+          },
+          {
+            hour: 1,
+            label: '1 hr',
+            description: 'Initial spread across 50 acres'
+          },
+          {
+            hour: 2,
+            label: '2 hrs',
+            description: 'First responders arrive on scene'
+          },
+          { hour: 3, label: '3 hrs', description: 'Fire reaches 250 acres' },
+          {
+            hour: 6,
+            label: '6 hrs',
+            description: 'First evacuation warnings issued'
+          },
+          {
+            hour: 9,
+            label: '9 hrs',
+            description: 'Fire jumps first containment line'
+          },
+          {
+            hour: 12,
+            label: '12 hrs',
+            description: 'Mandatory evacuations begin'
+          },
+          {
+            hour: 18,
+            label: '18 hrs',
+            description: 'Fire reaches 1,500 acres'
+          },
+          {
+            hour: 24,
+            label: '24 hrs',
+            description: 'Day 1 complete - 2,800 acres burned'
+          },
+          {
+            hour: 36,
+            label: '36 hrs',
+            description: 'Additional firefighting resources arrive'
+          },
+          {
+            hour: 48,
+            label: '48 hrs',
+            description: 'Day 2 complete - 8,500 acres burned'
+          },
+          {
+            hour: 72,
+            label: '3 days',
+            description: 'Fire reaches 15,000 acres'
+          },
+          {
+            hour: 96,
+            label: '4 days',
+            description: 'Wind event increases spread'
+          },
+          {
+            hour: 120,
+            label: '5 days',
+            description: 'Fire reaches 22,000 acres'
+          },
+          {
+            hour: 168,
+            label: '7 days',
+            description: '40% containment achieved'
+          },
+          { hour: 288, label: '12 days', description: 'Fire fully contained' }
+        ];
+
+        // Logarithmic scale function to position time markers
+        function logPosition(hour) {
+          if (hour === 0) return 0;
+          // Base positioning on the log of the hour to emphasize early hours
+          const maxHour = timePoints[timePoints.length - 1].hour;
+          const logMax = Math.log(maxHour + 1);
+          return (Math.log(hour + 1) / logMax) * 100;
+        }
+
+        // Current time index
+        let currentTimeIndex = 0;
+
+        // DOM elements
+        const progressBar = document.getElementById('timeline-progress');
+        const timeMarkers = document.getElementById('time-markers');
+        const timeIndicator = document.createElement('div');
+        timeIndicator.className = 'time-indicator';
+        document
+          .querySelector('.timeline-visualization')
+          .appendChild(timeIndicator);
+
+        // Create timeline markers
+        timePoints.forEach((point, index) => {
+          const marker = document.createElement('div');
+          marker.className = 'time-marker';
+          marker.dataset.index = index;
+          marker.style.left = `${logPosition(point.hour)}%`;
+
+          const line = document.createElement('div');
+          line.className = 'marker-line';
+
+          const label = document.createElement('div');
+          label.className = 'marker-label';
+          label.textContent = point.label;
+
+          marker.appendChild(line);
+          marker.appendChild(label);
+          timeMarkers.appendChild(marker);
+
+          // Add click event to each marker
+          marker.addEventListener('click', () => {
+            updateTimeline(index);
+          });
+        });
+
+        // Control buttons
+        const prevBtn = document.getElementById('prev-time-btn');
+        const nextBtn = document.getElementById('next-time-btn');
+        const playBtn = document.getElementById('play-btn');
+
+        prevBtn.addEventListener('click', () => {
+          if (currentTimeIndex > 0) {
+            updateTimeline(currentTimeIndex - 1);
+          }
+        });
+
+        nextBtn.addEventListener('click', () => {
+          if (currentTimeIndex < timePoints.length - 1) {
+            updateTimeline(currentTimeIndex + 1);
+          }
+        });
+
+        let isPlaying = false;
+        let playInterval;
+
+        playBtn.addEventListener('click', () => {
+          isPlaying = !isPlaying;
+          if (isPlaying) {
+            playBtn.innerHTML = `
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+              Pause
+            `;
+            playInterval = setInterval(() => {
+              if (currentTimeIndex < timePoints.length - 1) {
+                updateTimeline(currentTimeIndex + 1);
+              } else {
+                clearInterval(playInterval);
+                isPlaying = false;
+                playBtn.innerHTML = `
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                  Play
+                `;
+              }
+            }, 2000); // Advance every 2 seconds
+          } else {
+            clearInterval(playInterval);
+            playBtn.innerHTML = `
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Play
+            `;
+          }
+        });
+
+        // Function to update timeline to a specific point
+        function updateTimeline(index) {
+          currentTimeIndex = index;
+
+          // Update progress bar
+          progressBar.style.width = `${logPosition(timePoints[index].hour)}%`;
+
+          // Update time indicator
+          timeIndicator.textContent = `T+${timePoints[index].hour}h`;
+
+          // Update marker active states
+          document.querySelectorAll('.time-marker').forEach((marker, i) => {
+            if (i === index) {
+              marker.classList.add('active');
+            } else {
+              marker.classList.remove('active');
+            }
+          });
+
+          // Update timeline content
+          updateTimelineContent(index);
+
+          // Update button states
+          prevBtn.disabled = index === 0;
+          nextBtn.disabled = index === timePoints.length - 1;
+        }
+
+        // Function to update content based on timeline position
+        function updateTimelineContent(index) {
+          const point = timePoints[index];
+
+          // Update the visualization title
+          document.querySelector('.timeline-day-title').textContent =
+            point.hour < 24
+              ? `Hour ${point.hour}: ${point.description}`
+              : `Day ${Math.floor(point.hour / 24)}, Hour ${point.hour % 24}: ${
+                  point.description
+                }`;
+
+          // In a real implementation, you would update fire statistics, map visualization, etc.
+          // For now we'll just set placeholders with the current time point data
+          const detailsEl = document.querySelector('.placeholder-label');
+          if (detailsEl) {
+            detailsEl.textContent = point.description;
+          }
+
+          // Update sidebar timeline day highlights
+          document.querySelectorAll('.timeline-day').forEach((dayEl, i) => {
+            // Only highlight days we've reached
+            if ((i + 1) * 24 <= point.hour) {
+              dayEl.classList.add('active');
+              dayEl.style.borderLeftColor = 'var(--text-primary)';
+              dayEl.style.background = 'rgba(255, 255, 255, 0.05)';
+            } else {
+              dayEl.classList.remove('active');
+              dayEl.style.borderLeftColor = 'transparent';
+              dayEl.style.background = 'transparent';
+            }
+          });
+        }
+
+        // Initialize timeline at the start
+        updateTimeline(0);
+      });
+    </script>
   </body>
 </html>

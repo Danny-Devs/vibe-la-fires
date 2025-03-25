@@ -148,26 +148,32 @@
   <body>
     <site-header></site-header>
 
-    <div class="content-area">
-      <div class="stage" id="stage">
-        <!-- Stage content using placeholders -->
-        <h1>Experience 3: 3D Visualization</h1>
-
-        <div class="view-controls">
-          <button class="view-control active">Residential Area</button>
-          <button class="view-control">Hiking Trail</button>
-          <button class="view-control">Fire Line</button>
-          <button class="view-control">Recovery Zone</button>
-        </div>
-
-        <div class="viewer-container">
+    <div
+      class="content-area"
+      style="height: calc(100vh - var(--header-height)); overflow: hidden"
+    >
+      <div
+        class="stage"
+        id="stage"
+        style="display: flex; flex-direction: column; padding-right: 320px"
+      >
+        <!-- Full-height 3D viewer -->
+        <div
+          class="viewer-container"
+          style="
+            flex-grow: 1;
+            height: calc(100vh - var(--header-height));
+            margin: 0;
+            border-radius: 0;
+          "
+        >
           <div
             class="placeholder-label"
             style="font-size: 2em; margin-bottom: 10px"
           >
             3D VIEWER
           </div>
-          <p>Interactive 3D visualization would appear here</p>
+          <p>Interactive 3D visualization of the fire-affected areas</p>
 
           <div class="control-hints">
             <span>WASD to move</span>
@@ -177,42 +183,40 @@
             <span>Scroll to zoom</span>
           </div>
         </div>
-
-        <div class="placeholder">
-          <div class="placeholder-label">LOCATION DESCRIPTION</div>
-        </div>
-
-        <div class="placeholder">
-          <div class="placeholder-label">IMPACT ANALYSIS</div>
-        </div>
       </div>
 
       <div class="sidebar">
         <div class="sidebar-content" id="sidebar">
-          <h2>3D Experience Guide</h2>
+          <h2>3D Visualization</h2>
 
-          <div class="placeholder">
-            <div class="placeholder-label">CURRENT LOCATION INFO</div>
+          <div class="placeholder" style="margin-bottom: 30px">
+            <div class="placeholder-label">CURRENT LOCATION</div>
+          </div>
+
+          <div class="location-info" style="margin-bottom: 30px">
+            <h3 style="margin-bottom: 15px">Area Information</h3>
+            <p style="line-height: 1.6; margin-bottom: 15px">
+              This neighborhood lost 37 homes during the Eaton Fire. The intense
+              heat caused structural damage even to buildings that weren't
+              directly burned.
+            </p>
+            <p style="line-height: 1.6">
+              Notice how the fire followed the terrain, spreading faster uphill
+              and along areas with dense vegetation.
+            </p>
+          </div>
+
+          <div class="placeholder" style="margin-bottom: 30px">
+            <div class="placeholder-label">BEFORE & AFTER COMPARISON</div>
           </div>
 
           <div class="placeholder">
-            <div class="placeholder-label">CONTEXT & HISTORY</div>
-          </div>
-
-          <div class="placeholder">
-            <div class="placeholder-label">NAVIGATION TIPS</div>
-          </div>
-
-          <div class="placeholder">
-            <div class="placeholder-label">POINTS OF INTEREST</div>
+            <div class="placeholder-label">RECOVERY PROGRESS</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="progress-indicator">
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
       </div>
       <div class="progress-labels">
         <span>The Spark</span>

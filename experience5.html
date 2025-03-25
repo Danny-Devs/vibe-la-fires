@@ -184,12 +184,15 @@
   <body>
     <site-header></site-header>
 
-    <div class="content-area">
+    <div
+      class="content-area"
+      style="height: calc(100vh - var(--header-height)); overflow: hidden"
+    >
       <div class="stage" id="stage">
         <!-- Stage content using placeholders -->
-        <h1>Experience 5: Impact & Assessment</h1>
+        <h2 style="margin-bottom: 20px">Impact & Assessment</h2>
 
-        <div class="stat-cards">
+        <div class="stat-cards" style="margin-bottom: 20px">
           <!-- Stat Card 1 -->
           <div class="stat-card">
             <div class="stat-value">27,812</div>
@@ -221,7 +224,7 @@
           </div>
         </div>
 
-        <div class="impact-map">
+        <div class="impact-map" style="height: 300px; margin-bottom: 20px">
           <div class="placeholder-label">IMPACT MAP VISUALIZATION</div>
         </div>
 
@@ -232,19 +235,24 @@
           <button class="impact-tab">Infrastructure</button>
         </div>
 
-        <div class="impact-content">
-          <h2>Environmental Impact</h2>
-          <p>
+        <div class="impact-content" style="overflow-y: auto; max-height: 150px">
+          <h3 style="margin-bottom: 10px">Environmental Impact</h3>
+          <p style="margin-bottom: 15px">
             The Eaton Fire had significant environmental consequences that will
             continue to affect the region for years to come.
           </p>
 
-          <div class="placeholder" style="min-height: 200px">
-            <div class="placeholder-label">ENVIRONMENTAL IMPACT DETAILS</div>
-          </div>
+          <div
+            class="impact-details"
+            style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+          >
+            <div class="placeholder" style="height: 120px">
+              <div class="placeholder-label">ENVIRONMENTAL IMPACT DETAILS</div>
+            </div>
 
-          <div class="placeholder" style="min-height: 200px">
-            <div class="placeholder-label">BEFORE & AFTER COMPARISON</div>
+            <div class="placeholder" style="height: 120px">
+              <div class="placeholder-label">BEFORE & AFTER COMPARISON</div>
+            </div>
           </div>
         </div>
       </div>
@@ -253,16 +261,70 @@
         <div class="sidebar-content" id="sidebar">
           <h2>Impact Analysis</h2>
 
-          <div class="placeholder">
-            <div class="placeholder-label">RECOVERY EFFORTS</div>
+          <div class="recovery-section" style="margin-bottom: 30px">
+            <h3 style="margin-bottom: 15px">Recovery Efforts</h3>
+            <p style="line-height: 1.5; margin-bottom: 15px">
+              Recovery efforts are ongoing with over $12 million in federal
+              assistance allocated to rebuilding infrastructure and supporting
+              affected residents.
+            </p>
+            <div
+              class="recovery-stat"
+              style="display: flex; align-items: center; margin-bottom: 10px"
+            >
+              <div
+                style="
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  background: var(--logo-gradient);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin-right: 15px;
+                  font-weight: bold;
+                  color: white;
+                "
+              >
+                32%
+              </div>
+              <div>Homes rebuilt or under construction</div>
+            </div>
+            <div
+              class="recovery-stat"
+              style="display: flex; align-items: center"
+            >
+              <div
+                style="
+                  width: 50px;
+                  height: 50px;
+                  border-radius: 50%;
+                  background: var(--logo-gradient);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin-right: 15px;
+                  font-weight: bold;
+                  color: white;
+                "
+              >
+                78%
+              </div>
+              <div>Residents returned to the area</div>
+            </div>
           </div>
 
-          <div class="placeholder">
-            <div class="placeholder-label">LONG-TERM PROJECTIONS</div>
-          </div>
-
-          <div class="placeholder">
-            <div class="placeholder-label">FIRE ECOLOGY</div>
+          <div class="long-term" style="margin-bottom: 30px">
+            <h3 style="margin-bottom: 15px">Long-Term Projections</h3>
+            <ul style="list-style: disc; padding-left: 20px; line-height: 1.5">
+              <li style="margin-bottom: 8px">
+                Full ecological recovery estimated at 15-20 years
+              </li>
+              <li style="margin-bottom: 8px">
+                Increased risk of flooding for 3-5 years
+              </li>
+              <li>Enhanced fire prevention measures being implemented</li>
+            </ul>
           </div>
 
           <div class="placeholder">
@@ -272,9 +334,6 @@
       </div>
     </div>
 
-    <div class="progress-indicator">
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
       </div>
       <div class="progress-labels">
         <span>The Spark</span>

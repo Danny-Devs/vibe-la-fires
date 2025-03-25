@@ -104,69 +104,47 @@
   <body>
     <site-header></site-header>
 
-    <div class="content-area">
+    <div
+      class="content-area"
+      style="height: calc(100vh - var(--header-height)); overflow: hidden"
+    >
       <div class="stage" id="stage">
         <!-- Stage content using placeholders -->
-        <h1>Experience 1: The Spark</h1>
-
         <div class="placeholder image-placeholder">
-          <div class="placeholder-label">HERO IMAGE</div>
+          <div class="placeholder-label">SATELLITE IMAGERY OF INITIAL FIRE</div>
         </div>
 
         <div class="placeholder">
-          <div class="placeholder-label">INTRODUCTORY TEXT</div>
+          <div class="placeholder-label">
+            INTERACTIVE TIMELINE OF FIRST 24 HOURS
+          </div>
         </div>
 
         <div class="placeholder">
-          <div class="placeholder-label">KEY FACTS</div>
-        </div>
-
-        <div class="placeholder image-placeholder">
-          <div class="placeholder-label">SUPPORTING VISUAL</div>
+          <div class="placeholder-label">EXPERT COMMENTARY</div>
         </div>
       </div>
 
       <div class="sidebar">
         <div class="sidebar-content" id="sidebar">
-          <h2>Experience 1 Details</h2>
+          <h2>The Spark</h2>
 
           <div class="placeholder">
-            <div class="placeholder-label">TIMESTAMP</div>
+            <div class="placeholder-label">FIRE ORIGIN DETAILS</div>
           </div>
 
           <div class="placeholder">
-            <div class="placeholder-label">DESCRIPTION</div>
+            <div class="placeholder-label">WEATHER CONDITIONS</div>
           </div>
 
           <div class="placeholder">
-            <div class="placeholder-label">METADATA</div>
+            <div class="placeholder-label">EARLY RESPONSE</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="progress-indicator">
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
-      </div>
-      <div class="progress-labels">
-        <span class="active">The Spark</span>
-        <span>Timeline</span>
-        <span>3D View</span>
-        <span>Stories</span>
-        <span>Impact</span>
-        <span>Memorial</span>
-      </div>
-    </div>
-
-    <div class="nav-arrows">
-      <button class="nav-arrow prev" id="prevBtn" disabled>
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
-          <path d="M15 18l-6-6 6-6" />
-        </svg>
-        <span>Previous</span>
-      </button>
-
+    <div class="nav-arrows" style="justify-content: flex-end">
       <button
         class="nav-arrow next"
         id="nextBtn"
@@ -180,8 +158,7 @@
     </div>
 
     <script>
-      // Disable previous button since this is the first page
-      document.getElementById('prevBtn').disabled = true;
+      // Previous button is removed entirely as there is no previous page
     </script>
   </body>
 </html>

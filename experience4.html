@@ -177,12 +177,15 @@
   <body>
     <site-header></site-header>
 
-    <div class="content-area">
+    <div
+      class="content-area"
+      style="height: calc(100vh - var(--header-height)); overflow: hidden"
+    >
       <div class="stage" id="stage">
         <!-- Stage content using placeholders -->
-        <h1>Experience 4: Stories from the Fire</h1>
+        <h2 style="margin-bottom: 20px">Stories from the Fire</h2>
 
-        <div class="story-filter">
+        <div class="story-filter" style="margin-bottom: 20px">
           <button class="filter-btn active">All Stories</button>
           <button class="filter-btn">First Responders</button>
           <button class="filter-btn">Residents</button>
@@ -190,7 +193,13 @@
           <button class="filter-btn">Government</button>
         </div>
 
-        <div class="story-cards">
+        <div
+          class="story-cards"
+          style="
+            overflow-y: auto;
+            max-height: calc(100vh - var(--header-height) - 170px);
+          "
+        >
           <!-- Story Card 1 -->
           <div class="story-card">
             <div class="story-image">
@@ -257,38 +266,67 @@
             </div>
           </div>
         </div>
-
-        <div class="placeholder" style="min-height: 150px">
-          <div class="placeholder-label">SUBMIT YOUR STORY FORM</div>
-        </div>
       </div>
 
       <div class="sidebar">
         <div class="sidebar-content" id="sidebar">
-          <h2>Story Highlights</h2>
+          <h2>Featured Story</h2>
 
-          <div class="placeholder">
-            <div class="placeholder-label">FEATURED STORY</div>
+          <div class="featured-story" style="margin-bottom: 30px">
+            <div class="placeholder" style="height: 150px; margin-bottom: 15px">
+              <div class="placeholder-label">FEATURED STORY IMAGE</div>
+            </div>
+            <h3 style="margin-bottom: 10px">
+              "I Lost Everything But Found Community"
+            </h3>
+            <p
+              style="
+                font-size: 0.9em;
+                color: var(--text-secondary);
+                margin-bottom: 15px;
+              "
+            >
+              Michael Patel - Homeowner
+            </p>
+            <p style="line-height: 1.5; margin-bottom: 15px">
+              "In just hours, everything I had worked for my entire life was
+              gone. But in the days that followed, I discovered the true meaning
+              of community..."
+            </p>
+            <button class="btn-small">Read Full Story</button>
+          </div>
+
+          <div class="most-impactful" style="margin-bottom: 30px">
+            <h3 style="margin-bottom: 15px">Most Impactful Quotes</h3>
+            <blockquote
+              style="
+                border-left: 3px solid var(--text-primary);
+                padding-left: 15px;
+                margin-bottom: 15px;
+                font-style: italic;
+              "
+            >
+              "The sky was orange. It wasn't day or night anymore—it was just
+              fire."
+            </blockquote>
+            <blockquote
+              style="
+                border-left: 3px solid var(--text-primary);
+                padding-left: 15px;
+                font-style: italic;
+              "
+            >
+              "We're rebuilding together, not just our homes but our spirits."
+            </blockquote>
           </div>
 
           <div class="placeholder">
-            <div class="placeholder-label">MOST IMPACTFUL QUOTES</div>
-          </div>
-
-          <div class="placeholder">
-            <div class="placeholder-label">COMMUNITY VOICES</div>
-          </div>
-
-          <div class="placeholder">
-            <div class="placeholder-label">RELATED RESOURCES</div>
+            <div class="placeholder-label">SHARE YOUR STORY</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="progress-indicator">
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
       </div>
       <div class="progress-labels">
         <span>The Spark</span>

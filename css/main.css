@@ -14,6 +14,7 @@
     #cc2200 60%,
     #ff6600 100%
   );
+  --header-bg: #d9d9d9; /* Darker header background */
 }
 
 /* Dark theme */
@@ -25,6 +26,8 @@
   --text-secondary: #a3a3a3;
   --border-color: rgba(255, 255, 255, 0.1);
   --hover-color: rgba(255, 255, 255, 0.1);
+  --header-bg: #2e2e2e; /* Same as bg-secondary for dark mode */
+  --placeholder-text: #333333; /* Darker text for placeholders in dark mode */
 }
 
 /* Main styles */
@@ -43,7 +46,7 @@ body {
   left: 0;
   right: 0;
   z-index: 100;
-  background: var(--bg-secondary);
+  background: var(--header-bg); /* Use the new header background variable */
   padding: 0 40px;
   height: 80px;
   display: flex;
@@ -588,4 +591,13 @@ a:hover {
 .start-button:hover,
 .nav-group a:hover {
   text-decoration: none;
+}
+
+/* Mockup specific styles (adding these at the bottom of the file) */
+.placeholder-label {
+  color: var(--placeholder-text, #333333); /* Use the variable with fallback */
+}
+
+[data-theme='dark'] .placeholder-label {
+  color: var(--placeholder-text); /* Use dark mode placeholder text color */
 }

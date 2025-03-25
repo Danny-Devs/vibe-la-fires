@@ -209,11 +209,14 @@
   <body>
     <site-header></site-header>
 
-    <div class="content-area">
-      <div class="stage" id="stage">
+    <div
+      class="content-area"
+      style="height: calc(100vh - var(--header-height)); overflow: hidden"
+    >
+      <div class="stage" id="stage" style="overflow-y: auto; height: 100%">
         <!-- Stage content using placeholders -->
         <div class="memorial-header">
-          <h1>Experience 6: Memorial & Remembrance</h1>
+          <h2>Memorial & Remembrance</h2>
           <p class="memorial-subheading">
             Honoring those affected and looking toward resilient futures
           </p>
@@ -250,7 +253,7 @@
 
         <div class="tribute-form">
           <h3 class="form-title">Leave Your Tribute</h3>
-          <div class="form-group placeholder" style="min-height: 200px">
+          <div class="form-group placeholder" style="min-height: 120px">
             <div class="placeholder-label">TRIBUTE FORM FIELDS</div>
           </div>
           <button class="btn-primary" style="margin: 0 auto; display: block">
@@ -296,16 +299,84 @@
         <div class="sidebar-content" id="sidebar">
           <h2>Resources & Support</h2>
 
-          <div class="placeholder">
-            <div class="placeholder-label">COMMEMORATIVE EVENTS</div>
+          <div class="events-section" style="margin-bottom: 30px">
+            <h3 style="margin-bottom: 15px">Commemorative Events</h3>
+            <div
+              class="event"
+              style="
+                margin-bottom: 15px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid var(--border-color);
+              "
+            >
+              <p style="font-weight: 600; margin-bottom: 5px">
+                Annual Remembrance Ceremony
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  color: var(--text-secondary);
+                  margin-bottom: 5px;
+                "
+              >
+                July 12, 2023 • 10:00 AM
+              </p>
+              <p style="font-size: 0.9em">Eaton Community Park</p>
+            </div>
+            <div class="event" style="margin-bottom: 15px">
+              <p style="font-weight: 600; margin-bottom: 5px">
+                Memorial Garden Opening
+              </p>
+              <p
+                style="
+                  font-size: 0.9em;
+                  color: var(--text-secondary);
+                  margin-bottom: 5px;
+                "
+              >
+                August 3, 2023 • 3:00 PM
+              </p>
+              <p style="font-size: 0.9em">Eaton City Hall</p>
+            </div>
           </div>
 
-          <div class="placeholder">
-            <div class="placeholder-label">SUPPORT GROUPS</div>
-          </div>
-
-          <div class="placeholder">
-            <div class="placeholder-label">REBUILDING INITIATIVES</div>
+          <div class="support-section" style="margin-bottom: 30px">
+            <h3 style="margin-bottom: 15px">Support Groups</h3>
+            <ul style="list-style: none; line-height: 1.5">
+              <li style="margin-bottom: 8px">
+                <a
+                  href="#"
+                  style="
+                    color: var(--text-primary);
+                    text-decoration: none;
+                    display: block;
+                  "
+                  >Eaton Fire Survivors Network</a
+                >
+              </li>
+              <li style="margin-bottom: 8px">
+                <a
+                  href="#"
+                  style="
+                    color: var(--text-primary);
+                    text-decoration: none;
+                    display: block;
+                  "
+                  >First Responders Support Group</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  style="
+                    color: var(--text-primary);
+                    text-decoration: none;
+                    display: block;
+                  "
+                  >Community Rebuilding Initiative</a
+                >
+              </li>
+            </ul>
           </div>
 
           <div class="placeholder">
@@ -315,9 +386,6 @@
       </div>
     </div>
 
-    <div class="progress-indicator">
-      <div class="progress-bar">
-        <div class="progress-fill"></div>
       </div>
       <div class="progress-labels">
         <span>The Spark</span>
