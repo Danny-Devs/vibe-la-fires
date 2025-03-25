@@ -1,306 +1,259 @@
 // Common JavaScript for all experience pages
+import { debounce } from './utils/debounce.js';
 
-// Helper function to get elements by ID/class
-const $ = (selector) => document.querySelector(selector);
-const $$ = (selector) => document.querySelectorAll(selector);
-
-// Initialize the page based on which experience we're on
-document.addEventListener('DOMContentLoaded', () => {
-  // Determine which experience page we're on by checking the title
-  const pageTitle = document.title;
-  const experienceNumber = pageTitle.match(/Experience (\d+)/i) ?
-    parseInt(pageTitle.match(/Experience (\d+)/i)[1]) :
-    0;
-
-  // Initialize common controls
-  initNavigation();
-
-  // Initialize specific experience features
-  switch (experienceNumber) {
-    case 1:
-      initExperience1();
-      break;
-    case 2:
-      initExperience2();
-      break;
-    case 3:
-      initExperience3();
-      break;
-    case 4:
-      initExperience4();
-      break;
-    case 5:
-      initExperience5();
-      break;
-    case 6:
-      initExperience6();
-      break;
-    default:
-      // On the home page or other page
-      break;
-  }
-});
-
-// Initialize navigation buttons
-function initNavigation() {
-  const prevBtn = $('#prevBtn');
-  const nextBtn = $('#nextBtn');
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const href = prevBtn.getAttribute('onclick').match(/href='([^']+)'/)[1];
-      window.location.href = href;
-    });
+class ExperienceController {
+  constructor() {
+    this.$ = (selector) => document.querySelector(selector);
+    this.$$ = (selector) => document.querySelectorAll(selector);
+    this.experienceNumber = this.getExperienceNumber();
+    this.observers = new Map();
   }
 
-  if (nextBtn) {
-    nextBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const href = nextBtn.getAttribute('onclick').match(/href='([^']+)'/)[1];
-      window.location.href = href;
-    });
-  }
-}
-
-// Experience 1: The Spark
-function initExperience1() {
-  console.log('Initializing Experience 1: The Spark');
-
-  // Example: Animate elements in as they appear in viewport
-  const animatedElements = $$('.animate-on-scroll');
-  if (animatedElements.length > 0) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.2 });
-
-    animatedElements.forEach(el => observer.observe(el));
-  }
-}
-
-// Experience 2: Timeline
-function initExperience2() {
-  console.log('Initializing Experience 2: Timeline');
-
-  // Handle timeline slider functionality
-  const timelineSlider = $('#time-slider');
-  if (timelineSlider) {
-    timelineSlider.addEventListener('input', (e) => {
-      const day = parseInt(e.target.value);
-      updateTimelineDay(day);
-    });
+  getExperienceNumber() {
+    const pageTitle = document.title;
+    const match = pageTitle.match(/Experience (\d+)/i);
+    return match ? parseInt(match[1]) : 0;
   }
 
-  // Initialize timeline at day 0
-  updateTimelineDay(0);
-}
-
-function updateTimelineDay(day) {
-  console.log(`Updating timeline to day ${day}`);
-
-  // Example: Update the visualization, details, and stats based on day
-  const dayLabels = ['Day 1: Ignition', 'Day 2: Initial Spread', 'Day 3: Evacuation Orders',
-    'Day 4: Containment Efforts', 'Day 5: Major Wind Event',
-    'Day 6: Additional Resources', 'Day 7: Containment'];
-
-  const dayTitle = $('.timeline-day-title');
-  if (dayTitle) {
-    dayTitle.textContent = dayLabels[day] || `Day ${day + 1}`;
+  initialize() {
+    this.initNavigation();
+    this.initializeExperience();
   }
 
-  // Toggle active class on timeline days
-  $$('.timeline-day').forEach((dayEl, index) => {
-    if (index === day) {
-      dayEl.classList.add('active');
-    } else {
-      dayEl.classList.remove('active');
-    }
-  });
-}
+  initNavigation() {
+    const prevBtn = this.$('#prevBtn');
+    const nextBtn = this.$('#nextBtn');
 
-// Experience 3: 3D Visualization
-function initExperience3() {
-  console.log('Initializing Experience 3: 3D Visualization');
-
-  // Toggle between different view options
-  const viewControls = $$('.view-control');
-  viewControls.forEach(control => {
-    control.addEventListener('click', () => {
-      // Remove active class from all controls
-      viewControls.forEach(c => c.classList.remove('active'));
-      // Add active class to clicked control
-      control.classList.add('active');
-
-      // Handle view change
-      const viewName = control.textContent.trim();
-      changeView(viewName);
-    });
-  });
-}
-
-function changeView(viewName) {
-  console.log(`Changing 3D view to: ${viewName}`);
-  // In the actual implementation, this would change the 3D visualization
-  // For now, we just update the mock content
-}
-
-// Experience 4: Stories
-function initExperience4() {
-  console.log('Initializing Experience 4: Stories');
-
-  // Filter stories by category
-  const filterButtons = $$('.filter-btn');
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Remove active class from all buttons
-      filterButtons.forEach(b => b.classList.remove('active'));
-      // Add active class to clicked button
-      button.classList.add('active');
-
-      // Filter stories
-      const category = button.textContent.trim();
-      filterStories(category);
-    });
-  });
-
-  // Initialize story card click handlers
-  $$('.story-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-      // Don't trigger if they clicked the button directly
-      if (e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
-        const storyTitle = card.querySelector('.story-title').textContent;
-        const readMoreBtn = card.querySelector('button');
-        if (readMoreBtn) {
-          readMoreBtn.click();
-        }
-      }
-    });
-  });
-}
-
-function filterStories(category) {
-  console.log(`Filtering stories by category: ${category}`);
-  // In the actual implementation, this would filter the stories
-  // For now we just log the category
-}
-
-// Experience 5: Impact
-function initExperience5() {
-  console.log('Initializing Experience 5: Impact & Assessment');
-
-  // Handle tab switching
-  const impactTabs = $$('.impact-tab');
-  impactTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      // Remove active class from all tabs
-      impactTabs.forEach(t => t.classList.remove('active'));
-      // Add active class to clicked tab
-      tab.classList.add('active');
-
-      // Update content
-      const category = tab.textContent.trim();
-      updateImpactContent(category);
-    });
-  });
-}
-
-function updateImpactContent(category) {
-  console.log(`Updating impact content to: ${category}`);
-
-  // Update heading
-  const impactHeading = $('.impact-content h2');
-  if (impactHeading) {
-    impactHeading.textContent = `${category} Impact`;
-  }
-
-  // In the actual implementation, this would update the content
-  // For now we just update the heading
-}
-
-// Experience 6: Memorial
-function initExperience6() {
-  console.log('Initializing Experience 6: Memorial & Remembrance');
-
-  // Example: Gallery image popup
-  $$('.gallery-item').forEach(item => {
-    item.addEventListener('click', () => {
-      const imageSrc = item.dataset.src || '#';
-      // Would typically open a modal with the full image
-      console.log(`Opening memorial image: ${imageSrc}`);
-    });
-  });
-
-  // Form submission handling
-  const tributeForm = $('.tribute-form');
-  if (tributeForm) {
-    const submitBtn = tributeForm.querySelector('button');
-    if (submitBtn) {
-      submitBtn.addEventListener('click', (e) => {
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log('Tribute form submitted');
-        // In actual implementation, would submit the form
-        alert('Thank you for your tribute. It will be added to our memorial after review.');
+        const href = prevBtn.getAttribute('onclick')?.match(/href='([^']+)'/)?.[1];
+        if (href) window.location.href = href;
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = nextBtn.getAttribute('onclick')?.match(/href='([^']+)'/)?.[1];
+        if (href) window.location.href = href;
       });
     }
   }
-}
 
-// General utility functions that might be used across experiences
-function fadeIn(element, duration = 500) {
-  element.style.opacity = 0;
-  element.style.display = 'block';
-
-  let start = null;
-  function animate(timestamp) {
-    if (!start) start = timestamp;
-    const progress = timestamp - start;
-    element.style.opacity = Math.min(progress / duration, 1);
-
-    if (progress < duration) {
-      requestAnimationFrame(animate);
-    }
-  }
-
-  requestAnimationFrame(animate);
-}
-
-function fadeOut(element, duration = 500) {
-  let start = null;
-  function animate(timestamp) {
-    if (!start) start = timestamp;
-    const progress = timestamp - start;
-    element.style.opacity = Math.max(1 - progress / duration, 0);
-
-    if (progress < duration) {
-      requestAnimationFrame(animate);
-    } else {
-      element.style.display = 'none';
-    }
-  }
-
-  requestAnimationFrame(animate);
-}
-
-// Handle window resize events
-window.addEventListener('resize', debounce(() => {
-  console.log('Window resized');
-  // Adjust any visualizations or layouts here
-}, 250));
-
-// Debounce function to limit how often a function is called
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
+  initializeExperience() {
+    const experienceInitializers = {
+      1: () => this.initExperience1(),
+      2: () => this.initExperience2(),
+      3: () => this.initExperience3(),
+      4: () => this.initExperience4(),
+      5: () => this.initExperience5(),
+      6: () => this.initExperience6()
     };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-} 
+
+    const initializer = experienceInitializers[this.experienceNumber];
+    if (initializer) {
+      try {
+        initializer();
+      } catch (error) {
+        console.error(`Failed to initialize experience ${this.experienceNumber}:`, error);
+        this.showErrorState();
+      }
+    }
+  }
+
+  // Experience 1: The Spark
+  initExperience1() {
+    console.log('Initializing Experience 1: The Spark');
+
+    const animatedElements = this.$$('.animate-on-scroll');
+    if (animatedElements.length > 0) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      animatedElements.forEach(el => observer.observe(el));
+      this.observers.set('animation', observer);
+    }
+  }
+
+  // Experience 2: Timeline
+  initExperience2() {
+    console.log('Initializing Experience 2: Timeline');
+
+    const timelineSlider = this.$('#time-slider');
+    if (timelineSlider) {
+      timelineSlider.addEventListener('input', (e) => {
+        this.updateTimelineDay(parseInt(e.target.value));
+      });
+      this.updateTimelineDay(0);
+    }
+  }
+
+  updateTimelineDay(day) {
+    const dayLabels = [
+      'Day 1: Ignition',
+      'Day 2: Initial Spread',
+      'Day 3: Evacuation Orders',
+      'Day 4: Containment Efforts',
+      'Day 5: Major Wind Event',
+      'Day 6: Additional Resources',
+      'Day 7: Containment'
+    ];
+
+    const dayTitle = this.$('.timeline-day-title');
+    if (dayTitle) {
+      dayTitle.textContent = dayLabels[day] || `Day ${day + 1}`;
+    }
+
+    this.$$('.timeline-day').forEach((dayEl, index) => {
+      dayEl.classList.toggle('active', index === day);
+    });
+  }
+
+  // Experience 3: 3D Visualization
+  initExperience3() {
+    console.log('Initializing Experience 3: 3D Visualization');
+
+    this.$$('.view-control').forEach(control => {
+      control.addEventListener('click', () => {
+        this.$$('.view-control').forEach(c => c.classList.remove('active'));
+        control.classList.add('active');
+        this.changeView(control.textContent.trim());
+      });
+    });
+  }
+
+  changeView(viewName) {
+    console.log(`Changing 3D view to: ${viewName}`);
+    // Implementation will be added when 3D visualization is ready
+  }
+
+  // Experience 4: Stories
+  initExperience4() {
+    console.log('Initializing Experience 4: Stories');
+
+    this.$$('.filter-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        this.$$('.filter-btn').forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
+        this.filterStories(button.textContent.trim());
+      });
+    });
+
+    this.$$('.story-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
+          const readMoreBtn = card.querySelector('button');
+          readMoreBtn?.click();
+        }
+      });
+    });
+  }
+
+  filterStories(category) {
+    const storyCards = this.$$('.story-card');
+    storyCards.forEach(card => {
+      const cardCategory = card.dataset.category;
+      card.style.display = category === 'All' || cardCategory === category ? 'block' : 'none';
+    });
+  }
+
+  // Experience 5: Impact
+  initExperience5() {
+    console.log('Initializing Experience 5: Impact & Assessment');
+
+    this.$$('.impact-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        this.$$('.impact-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        this.updateImpactContent(tab.textContent.trim());
+      });
+    });
+  }
+
+  updateImpactContent(category) {
+    const impactHeading = this.$('.impact-content h2');
+    if (impactHeading) {
+      impactHeading.textContent = `${category} Impact`;
+    }
+
+    // Update content based on category
+    const contentMap = {
+      'Environmental': () => this.showEnvironmentalImpact(),
+      'Economic': () => this.showEconomicImpact(),
+      'Social': () => this.showSocialImpact()
+    };
+
+    const updateFunction = contentMap[category];
+    if (updateFunction) updateFunction();
+  }
+
+  // Experience 6: Memorial
+  initExperience6() {
+    console.log('Initializing Experience 6: Memorial & Remembrance');
+
+    this.$$('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const imageSrc = item.dataset.src;
+        if (imageSrc) this.openGalleryModal(imageSrc);
+      });
+    });
+
+    const tributeForm = this.$('.tribute-form');
+    if (tributeForm) {
+      tributeForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.handleTributeSubmission(e.target);
+      });
+    }
+  }
+
+  openGalleryModal(imageSrc) {
+    // Implementation will be added when gallery modal is ready
+    console.log(`Opening memorial image: ${imageSrc}`);
+  }
+
+  async handleTributeSubmission(form) {
+    try {
+      const formData = new FormData(form);
+      // Implementation will be added when backend is ready
+      console.log('Tribute form submitted:', Object.fromEntries(formData));
+      alert('Thank you for your tribute. It will be added to our memorial after review.');
+    } catch (error) {
+      console.error('Failed to submit tribute:', error);
+      alert('Sorry, there was an error submitting your tribute. Please try again later.');
+    }
+  }
+
+  showErrorState() {
+    const container = this.$('.experience-container') || document.body;
+    container.innerHTML = `
+      <div class="error-state">
+        <h2>Something went wrong</h2>
+        <p>We're having trouble loading this experience. Please try refreshing the page.</p>
+        <button onclick="window.location.reload()">Refresh Page</button>
+      </div>
+    `;
+  }
+
+  cleanup() {
+    // Cleanup observers and event listeners when navigating away
+    this.observers.forEach(observer => observer.disconnect());
+    this.observers.clear();
+  }
+}
+
+// Initialize experience controller when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  const controller = new ExperienceController();
+  controller.initialize();
+
+  // Cleanup when navigating away
+  window.addEventListener('beforeunload', () => controller.cleanup());
+}); 
