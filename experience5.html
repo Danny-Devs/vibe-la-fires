@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Eaton Fire - Experience 5</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <style>
+      /* Mockup specific styles */
+      .placeholder {
+        background-color: rgba(200, 200, 200, 0.3);
+        border: 1px dashed #999;
+        position: relative;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .placeholder::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            to bottom right,
+            transparent calc(50% - 1px),
+            #999,
+            transparent calc(50% + 1px)
+          ),
+          linear-gradient(
+            to top right,
+            transparent calc(50% - 1px),
+            #999,
+            transparent calc(50% + 1px)
+          );
+      }
+
+      .placeholder-label {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-weight: bold;
+        z-index: 2;
+      }
+
+      .image-placeholder {
+        min-height: 300px;
+      }
+
+      .progress-indicator {
+        position: fixed;
+        bottom: 100px;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 90;
+        padding: 0 40px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 4px;
+        background: var(--border-color);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: var(--logo-gradient);
+        width: 83.3%; /* 5/6 of the total */
+        transition: width 0.5s ease;
+      }
+
+      .progress-labels {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        width: 100%;
+        margin-top: 8px;
+        font-size: 0.8rem;
+      }
+
+      .progress-labels span {
+        text-align: center;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+      }
+
+      .progress-labels span.active {
+        opacity: 1;
+        font-weight: 600;
+      }
+
+      /* Impact specific mockup */
+      .stat-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background: var(--bg-secondary);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        padding: 15px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .stat-value {
+        font-size: 2.5em;
+        font-weight: 700;
+        margin-bottom: 5px;
+        background: var(--logo-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .stat-label {
+        font-size: 0.9em;
+        color: var(--text-secondary);
+      }
+
+      .impact-tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .impact-tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        position: relative;
+        background: none;
+        border: none;
+      }
+
+      .impact-tab.active {
+        font-weight: 600;
+      }
+
+      .impact-tab.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--logo-gradient);
+        border-radius: 3px 3px 0 0;
+      }
+
+      .impact-content {
+        margin-bottom: 30px;
+      }
+
+      .impact-map {
+        width: 100%;
+        height: 400px;
+        background-color: #444;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+    </style>
+    <script type="module" src="js/components/Header.js"></script>
+    <script src="js/experience.js"></script>
+  </head>
+  <body>
+    <site-header></site-header>
+
+    <div class="content-area">
+      <div class="stage" id="stage">
+        <!-- Stage content using placeholders -->
+        <h1>Experience 5: Impact & Assessment</h1>
+
+        <div class="stat-cards">
+          <!-- Stat Card 1 -->
+          <div class="stat-card">
+            <div class="stat-value">27,812</div>
+            <div class="stat-label">Acres Burned</div>
+          </div>
+
+          <!-- Stat Card 2 -->
+          <div class="stat-card">
+            <div class="stat-value">146</div>
+            <div class="stat-label">Structures Lost</div>
+          </div>
+
+          <!-- Stat Card 3 -->
+          <div class="stat-card">
+            <div class="stat-value">$48M</div>
+            <div class="stat-label">Economic Impact</div>
+          </div>
+
+          <!-- Stat Card 4 -->
+          <div class="stat-card">
+            <div class="stat-value">1,428</div>
+            <div class="stat-label">People Evacuated</div>
+          </div>
+
+          <!-- Stat Card 5 -->
+          <div class="stat-card">
+            <div class="stat-value">12</div>
+            <div class="stat-label">Days to Contain</div>
+          </div>
+        </div>
+
+        <div class="impact-map">
+          <div class="placeholder-label">IMPACT MAP VISUALIZATION</div>
+        </div>
+
+        <div class="impact-tabs">
+          <button class="impact-tab active">Environmental</button>
+          <button class="impact-tab">Economic</button>
+          <button class="impact-tab">Community</button>
+          <button class="impact-tab">Infrastructure</button>
+        </div>
+
+        <div class="impact-content">
+          <h2>Environmental Impact</h2>
+          <p>
+            The Eaton Fire had significant environmental consequences that will
+            continue to affect the region for years to come.
+          </p>
+
+          <div class="placeholder" style="min-height: 200px">
+            <div class="placeholder-label">ENVIRONMENTAL IMPACT DETAILS</div>
+          </div>
+
+          <div class="placeholder" style="min-height: 200px">
+            <div class="placeholder-label">BEFORE & AFTER COMPARISON</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="sidebar-content" id="sidebar">
+          <h2>Impact Analysis</h2>
+
+          <div class="placeholder">
+            <div class="placeholder-label">RECOVERY EFFORTS</div>
+          </div>
+
+          <div class="placeholder">
+            <div class="placeholder-label">LONG-TERM PROJECTIONS</div>
+          </div>
+
+          <div class="placeholder">
+            <div class="placeholder-label">FIRE ECOLOGY</div>
+          </div>
+
+          <div class="placeholder">
+            <div class="placeholder-label">SUPPORT RESOURCES</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-indicator">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-labels">
+        <span>The Spark</span>
+        <span>Timeline</span>
+        <span>3D View</span>
+        <span>Stories</span>
+        <span class="active">Impact</span>
+        <span>Memorial</span>
+      </div>
+    </div>
+
+    <div class="nav-arrows">
+      <button
+        class="nav-arrow prev"
+        id="prevBtn"
+        onclick="window.location.href='experience4.html'"
+      >
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        <span>Previous</span>
+      </button>
+
+      <button
+        class="nav-arrow next"
+        id="nextBtn"
+        onclick="window.location.href='experience6.html'"
+      >
+        <span>Next</span>
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+    </div>
+  </body>
+</html>

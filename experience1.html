@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Eaton Fire - Experience 1</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <style>
+      /* Mockup specific styles */
+      .placeholder {
+        background-color: rgba(200, 200, 200, 0.3);
+        border: 1px dashed #999;
+        position: relative;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .placeholder::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            to bottom right,
+            transparent calc(50% - 1px),
+            #999,
+            transparent calc(50% + 1px)
+          ),
+          linear-gradient(
+            to top right,
+            transparent calc(50% - 1px),
+            #999,
+            transparent calc(50% + 1px)
+          );
+      }
+
+      .placeholder-label {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-weight: bold;
+        z-index: 2;
+      }
+
+      .image-placeholder {
+        min-height: 300px;
+      }
+
+      .progress-indicator {
+        position: fixed;
+        bottom: 100px;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 90;
+        padding: 0 40px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 4px;
+        background: var(--border-color);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: var(--logo-gradient);
+        width: 16.67%; /* 1/6 of the total */
+        transition: width 0.5s ease;
+      }
+
+      .progress-labels {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        width: 100%;
+        margin-top: 8px;
+        font-size: 0.8rem;
+      }
+
+      .progress-labels span {
+        text-align: center;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+      }
+
+      .progress-labels span.active {
+        opacity: 1;
+        font-weight: 600;
+      }
+    </style>
+    <script type="module" src="js/components/Header.js"></script>
+    <script src="js/experience.js"></script>
+  </head>
+  <body>
+    <site-header></site-header>
+
+    <div class="content-area">
+      <div class="stage" id="stage">
+        <!-- Stage content using placeholders -->
+        <h1>Experience 1: The Spark</h1>
+
+        <div class="placeholder image-placeholder">
+          <div class="placeholder-label">HERO IMAGE</div>
+        </div>
+
+        <div class="placeholder">
+          <div class="placeholder-label">INTRODUCTORY TEXT</div>
+        </div>
+
+        <div class="placeholder">
+          <div class="placeholder-label">KEY FACTS</div>
+        </div>
+
+        <div class="placeholder image-placeholder">
+          <div class="placeholder-label">SUPPORTING VISUAL</div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="sidebar-content" id="sidebar">
+          <h2>Experience 1 Details</h2>
+
+          <div class="placeholder">
+            <div class="placeholder-label">TIMESTAMP</div>
+          </div>
+
+          <div class="placeholder">
+            <div class="placeholder-label">DESCRIPTION</div>
+          </div>
+
+          <div class="placeholder">
+            <div class="placeholder-label">METADATA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-indicator">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-labels">
+        <span class="active">The Spark</span>
+        <span>Timeline</span>
+        <span>3D View</span>
+        <span>Stories</span>
+        <span>Impact</span>
+        <span>Memorial</span>
+      </div>
+    </div>
+
+    <div class="nav-arrows">
+      <button class="nav-arrow prev" id="prevBtn" disabled>
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        <span>Previous</span>
+      </button>
+
+      <button
+        class="nav-arrow next"
+        id="nextBtn"
+        onclick="window.location.href='experience2.html'"
+      >
+        <span>Next</span>
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+    </div>
+
+    <script>
+      // Disable previous button since this is the first page
+      document.getElementById('prevBtn').disabled = true;
+    </script>
+  </body>
+</html>

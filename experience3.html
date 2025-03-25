@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Eaton Fire - Experience 3</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <style>
+      /* Mockup specific styles */
+      .placeholder {
+        background-color: rgba(200, 200, 200, 0.3);
+        border: 1px dashed #999;
+        position: relative;
+        min-height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .placeholder::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+            to bottom right,
+            transparent calc(50% - 1px),
+            #999,
+            transparent calc(50% + 1px)
+          ),
+          linear-gradient(
+            to top right,
+            transparent calc(50% - 1px),
+            #999,
+            transparent calc(50% + 1px)
+          );
+      }
+
+      .placeholder-label {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-weight: bold;
+        z-index: 2;
+      }
+
+      .image-placeholder {
+        min-height: 300px;
+      }
+
+      .progress-indicator {
+        position: fixed;
+        bottom: 100px;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 90;
+        padding: 0 40px;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 4px;
+        background: var(--border-color);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background: var(--logo-gradient);
+        width: 50%; /* 3/6 of the total */
+        transition: width 0.5s ease;
+      }
+
+      .progress-labels {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        width: 100%;
+        margin-top: 8px;
+        font-size: 0.8rem;
+      }
+
+      .progress-labels span {
+        text-align: center;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
+      }
+
+      .progress-labels span.active {
+        opacity: 1;
+        font-weight: 600;
+      }
+
+      /* 3D View specific mockup */
+      .viewer-container {
+        position: relative;
+        height: 500px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      .view-controls {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .view-control {
+        padding: 8px 16px;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .view-control.active {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+      }
+
+      .control-hints {
+        position: absolute;
+        bottom: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 4px;
+        display: flex;
+        gap: 10px;
+        font-size: 0.9em;
+      }
+    </style>
+    <script type="module" src="js/components/Header.js"></script>
+    <script src="js/experience.js"></script>
+  </head>
+  <body>
+    <site-header></site-header>
+
+    <div class="content-area">
+      <div class="stage" id="stage">
+        <!-- Stage content using placeholders -->
+        <h1>Experience 3: 3D Visualization</h1>
+
+        <div class="view-controls">
+          <button class="view-control active">Residential Area</button>
+          <button class="view-control">Hiking Trail</button>
+          <button class="view-control">Fire Line</button>
+          <button class="view-control">Recovery Zone</button>
+        </div>
+
+        <div class="viewer-container">
+          <div
+            class="placeholder-label"
+            style="font-size: 2em; margin-bottom: 10px"
+          >
+            3D VIEWER
+          </div>
+          <p>Interactive 3D visualization would appear here</p>
+
+          <div class="control-hints">
+            <span>WASD to move</span>
+            <span>•</span>
+            <span>Mouse to look around</span>
+            <span>•</span>
+            <span>Scroll to zoom</span>
+          </div>
+        </div>
+
+        <div class="placeholder">
+          <div class="placeholder-label">LOCATION DESCRIPTION</div>
+        </div>
+
+        <div class="placeholder">
+          <div class="placeholder-label">IMPACT ANALYSIS</div>
+        </div>
+      </div>
+
+      <div class="sidebar">
+        <div class="sidebar-content" id="sidebar">
+          <h2>3D Experience Guide</h2>
+
+          <div class="placeholder">
+            <div class="placeholder-label">CURRENT LOCATION INFO</div>
+          </div>
+
+          <div class="placeholder">
+            <div class="placeholder-label">CONTEXT & HISTORY</div>
+          </div>
+
+          <div class="placeholder">
+            <div class="placeholder-label">NAVIGATION TIPS</div>
+          </div>
+
+          <div class="placeholder">
+            <div class="placeholder-label">POINTS OF INTEREST</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress-indicator">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-labels">
+        <span>The Spark</span>
+        <span>Timeline</span>
+        <span class="active">3D View</span>
+        <span>Stories</span>
+        <span>Impact</span>
+        <span>Memorial</span>
+      </div>
+    </div>
+
+    <div class="nav-arrows">
+      <button
+        class="nav-arrow prev"
+        id="prevBtn"
+        onclick="window.location.href='experience2.html'"
+      >
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+        <span>Previous</span>
+      </button>
+
+      <button
+        class="nav-arrow next"
+        id="nextBtn"
+        onclick="window.location.href='experience4.html'"
+      >
+        <span>Next</span>
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+    </div>
+  </body>
+</html>

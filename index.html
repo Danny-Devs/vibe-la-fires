@@ -3,22 +3,348 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Eaton Fire</title>
+    <title>The Eaton Fire Experience</title>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/main.css" />
+    <style>
+      .hero {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 60px;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+      }
+
+      .hero-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        padding: 0 20px;
+      }
+
+      .hero-title {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        color: #fff;
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 40px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .hero-cta {
+        display: inline-block;
+        padding: 15px 30px;
+        background: var(--text-primary);
+        color: var(--bg-primary);
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .hero-cta:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .experience-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto 100px;
+        padding: 0 20px;
+      }
+
+      .experience-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: var(--bg-secondary);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .experience-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-image {
+        height: 200px;
+        background-color: #444;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card-content {
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .card-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .card-description {
+        color: var(--text-secondary);
+        margin-bottom: 20px;
+        line-height: 1.5;
+        flex-grow: 1;
+      }
+
+      .card-link {
+        display: inline-block;
+        padding: 10px 20px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        border: 1px solid var(--text-primary);
+        border-radius: 30px;
+        text-decoration: none;
+        text-align: center;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      .card-link:hover {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+      }
+
+      .about-section {
+        max-width: 1000px;
+        margin: 0 auto 100px;
+        padding: 0 20px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .about-text {
+        line-height: 1.6;
+      }
+
+      .about-text p {
+        margin-bottom: 20px;
+      }
+
+      .about-image {
+        background-color: #444;
+        height: 300px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .hero-title {
+          font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+          font-size: 1.2rem;
+        }
+
+        .about-content {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
     <script type="module" src="js/components/Header.js"></script>
-    <script type="module" src="js/app.js"></script>
   </head>
   <body>
     <site-header></site-header>
 
-    <main class="splash-content">
-      <a href="experience.html" class="start-button">
-        <span>Learn About the Eaton Fire</span>
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none">
-          <path d="M5 12h14m-7-7l7 7-7 7" />
-        </svg>
-      </a>
-    </main>
+    <div class="hero">
+      <div class="placeholder hero-video">
+        <div class="placeholder-label">FIRE BACKGROUND VIDEO</div>
+      </div>
+      <div class="hero-content">
+        <h1 class="hero-title">The Eaton Fire Experience</h1>
+        <p class="hero-subtitle">
+          A powerful interactive journey through one of California's most
+          impactful wildfires
+        </p>
+        <a href="experience1.html" class="hero-cta">Begin Your Journey</a>
+      </div>
+    </div>
+
+    <div class="about-section">
+      <h2 class="section-title">About This Project</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            The Eaton Fire Experience is an interactive documentary that takes
+            you through the timeline, impact, and personal stories of this
+            devastating wildfire that affected thousands of lives in California.
+          </p>
+          <p>
+            Through immersive visualizations, real-time data, personal accounts,
+            and memorial tributes, this experience aims to educate, commemorate,
+            and inspire action toward wildfire prevention and community
+            resilience.
+          </p>
+          <p>
+            Choose any experience below to begin your journey, or follow the
+            guided path starting with "The Spark" to get the complete
+            chronological story.
+          </p>
+        </div>
+        <div class="about-image">
+          <div class="placeholder-label">PROJECT INTRO IMAGE</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="experiences" class="experience-cards">
+      <!-- Experience 1 Card -->
+      <div class="experience-card">
+        <div class="card-image">
+          <div class="placeholder-label">EXPERIENCE 1 IMAGE</div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">1. The Spark</h3>
+          <p class="card-description">
+            Witness how the Eaton Fire began and understand the critical first
+            hours through interactive visualizations and experts' accounts.
+          </p>
+          <a href="experience1.html" class="card-link">Enter Experience</a>
+        </div>
+      </div>
+
+      <!-- Experience 2 Card -->
+      <div class="experience-card">
+        <div class="card-image">
+          <div class="placeholder-label">EXPERIENCE 2 IMAGE</div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">2. Timeline</h3>
+          <p class="card-description">
+            Follow the day-by-day progression of the fire through an interactive
+            timeline showing spread patterns, containment efforts, and key
+            events.
+          </p>
+          <a href="experience2.html" class="card-link">Enter Experience</a>
+        </div>
+      </div>
+
+      <!-- Experience 3 Card -->
+      <div class="experience-card">
+        <div class="card-image">
+          <div class="placeholder-label">EXPERIENCE 3 IMAGE</div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">3. 3D Visualization</h3>
+          <p class="card-description">
+            Explore a 3D visualization of affected areas, seeing before and
+            after perspectives of neighborhoods, natural areas, and recovery
+            zones.
+          </p>
+          <a href="experience3.html" class="card-link">Enter Experience</a>
+        </div>
+      </div>
+
+      <!-- Experience 4 Card -->
+      <div class="experience-card">
+        <div class="card-image">
+          <div class="placeholder-label">EXPERIENCE 4 IMAGE</div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">4. Stories</h3>
+          <p class="card-description">
+            Hear personal accounts from firefighters, residents, volunteers, and
+            officials who experienced the Eaton Fire firsthand.
+          </p>
+          <a href="experience4.html" class="card-link">Enter Experience</a>
+        </div>
+      </div>
+
+      <!-- Experience 5 Card -->
+      <div class="experience-card">
+        <div class="card-image">
+          <div class="placeholder-label">EXPERIENCE 5 IMAGE</div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">5. Impact</h3>
+          <p class="card-description">
+            Understand the environmental, economic, and community impacts
+            through data visualizations, statistics, and expert analyses.
+          </p>
+          <a href="experience5.html" class="card-link">Enter Experience</a>
+        </div>
+      </div>
+
+      <!-- Experience 6 Card -->
+      <div class="experience-card">
+        <div class="card-image">
+          <div class="placeholder-label">EXPERIENCE 6 IMAGE</div>
+        </div>
+        <div class="card-content">
+          <h3 class="card-title">6. Memorial</h3>
+          <p class="card-description">
+            Remember those affected, honor the resilience of the community, and
+            contribute your own reflections to the memorial wall.
+          </p>
+          <a href="experience6.html" class="card-link">Enter Experience</a>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p>&copy; 2023 The Eaton Fire Experience. All rights reserved.</p>
+        <p>
+          This interactive documentary was created to educate and commemorate.
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
