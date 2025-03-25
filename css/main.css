@@ -2,7 +2,7 @@
 :root {
   /* Light theme (default) */
   --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
+  --bg-secondary: #e6e6e6; /* Darkened from #f8f9fa for better contrast */
   --bg-tertiary: #e9ecef; /* Darker shade for footer */
   --text-primary: #333333;
   --text-secondary: #666666;
@@ -19,7 +19,7 @@
 /* Dark theme */
 [data-theme='dark'] {
   --bg-primary: #1a1a1a;
-  --bg-secondary: #262626;
+  --bg-secondary: #2e2e2e; /* Lightened from #262626 for header */
   --bg-tertiary: #333333; /* Darker shade for footer */
   --text-primary: #f5f5f5;
   --text-secondary: #a3a3a3;
@@ -339,7 +339,6 @@ body {
 
 .start-button:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  border-color: transparent;
 }
 
 .start-button:hover::after {
