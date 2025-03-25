@@ -7,24 +7,42 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/main.css" />
     <script type="module" src="js/components/Header.js"></script>
+    <script type="module" src="js/components/Timeline.js"></script>
+    <script type="module" src="js/components/GaussianSplat.js"></script>
+    <script type="module" src="js/components/Stories.js"></script>
+    <script type="module" src="js/components/Impact.js"></script>
+    <script type="module" src="js/components/Prevention.js"></script>
+    <script type="module" src="js/components/Memorial.js"></script>
     <script type="module" src="js/app.js"></script>
   </head>
   <body>
     <site-header></site-header>
 
     <div class="content-area">
-      <div class="stage">
-        <!-- Stage content -->
-        <h1>The Spark</h1>
-        <p>Content goes here...</p>
+      <div class="stage" id="stage">
+        <!-- Stage content will be populated by JavaScript -->
       </div>
 
       <div class="sidebar">
         <!-- Sidebar content -->
-        <div class="sidebar-content">
-          <h2>October 1, 2024</h2>
-          <p>Sidebar content goes here...</p>
+        <div class="sidebar-content" id="sidebar">
+          <!-- Sidebar content will be populated by JavaScript -->
         </div>
+      </div>
+    </div>
+
+    <div class="progress-indicator">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-labels">
+        <span>The Spark</span>
+        <span>Timeline</span>
+        <span>3D Experience</span>
+        <span>Stories</span>
+        <span>Environment</span>
+        <span>Prevention</span>
+        <span>Memorial</span>
       </div>
     </div>
 

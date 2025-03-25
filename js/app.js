@@ -20,23 +20,100 @@ async function initializeApp() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Mock experiences data
+  // Experiences data for all sections
   const experiences = [
     {
       id: 1,
       title: "The Spark",
       stage: {
         type: "image",
-        content: "https://images.unsplash.com/photo-1542396601-dca920ea2807?auto=format&fit=crop&q=80",
+        content: "assets/images/spark/utility-pole.jpg",
         alt: "Utility pole in Altadena"
       },
       sidebar: {
         title: "The Eaton Fire Begins",
         timestamp: "October 1, 2024 - 2:15 PM",
-        content: "Strong Santa Ana winds reaching speeds of 72mph caused a utility pole failure in the foothills of Altadena."
+        content: "Strong Santa Ana winds reaching speeds of 72mph caused a utility pole failure in the foothills of Altadena. Downed power lines ignited dry brush, quickly spreading fire through the canyon."
       }
     },
-    // Add more experiences here
+    {
+      id: 2,
+      title: "Timeline",
+      stage: {
+        type: "timeline",
+        content: "timeline-component"
+      },
+      sidebar: {
+        title: "Fire Progression",
+        timestamp: "October 1-7, 2024",
+        content: "The Eaton Fire grew rapidly due to strong winds and dry conditions. Track how the fire spread and was eventually contained over seven critical days."
+      }
+    },
+    {
+      id: 3,
+      title: "3D Experience",
+      stage: {
+        type: "gaussian-splat",
+        content: "gaussian-splat-component"
+      },
+      sidebar: {
+        title: "Walk Through the Aftermath",
+        timestamp: "Present Day",
+        content: "Explore key locations affected by the Eaton Fire through 3D photogrammetry captures. Move between different areas to see the full impact and early recovery efforts."
+      }
+    },
+    {
+      id: 4,
+      title: "Community Stories",
+      stage: {
+        type: "stories",
+        content: "stories-component"
+      },
+      sidebar: {
+        title: "Voices from the Community",
+        timestamp: "Personal Accounts",
+        content: "Hear from those who experienced the Eaton Fire firsthand. These personal stories highlight the human impact of wildfires and showcase the community's resilience."
+      }
+    },
+    {
+      id: 5,
+      title: "Environmental Impact",
+      stage: {
+        type: "impact",
+        content: "impact-component"
+      },
+      sidebar: {
+        title: "Environmental Consequences",
+        timestamp: "Ongoing Assessment",
+        content: "The Eaton Fire dramatically altered the local ecosystem. Examine before and after comparisons, and learn about the ongoing recovery process for this sensitive habitat."
+      }
+    },
+    {
+      id: 6,
+      title: "Prevention & Future",
+      stage: {
+        type: "prevention",
+        content: "prevention-component"
+      },
+      sidebar: {
+        title: "Preventing Future Disasters",
+        timestamp: "Looking Forward",
+        content: "Learn essential wildfire prevention techniques for your home and community. Use the interactive simulator to assess and improve your wildfire readiness."
+      }
+    },
+    {
+      id: 7,
+      title: "Memorial",
+      stage: {
+        type: "memorial",
+        content: "memorial-component"
+      },
+      sidebar: {
+        title: "Remembrance & Reflection",
+        timestamp: "Community Memorial",
+        content: "A space to honor what was lost and celebrate the community's resilience. Read reflections from community members and share your own thoughts about the Eaton Fire."
+      }
+    }
   ];
 
   let currentExperience = 0;
@@ -44,15 +121,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const sidebar = document.getElementById('sidebar');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
-  const navHint = document.getElementById('navHint');
+  const progressFill = document.getElementById('progressFill');
+  const progressLabels = document.querySelectorAll('.progress-labels span');
 
-  // Show navigation hint
-  setTimeout(() => {
-    navHint.classList.add('visible');
-    setTimeout(() => {
-      navHint.classList.remove('visible');
-    }, 3000);
-  }, 1000);
+  function updateProgress(index) {
+    // Update progress bar
+    const progress = ((index) / (experiences.length - 1)) * 100;
+    progressFill.style.width = `${progress}%`;
+
+    // Update active label
+    progressLabels.forEach((label, i) => {
+      if (i === index) {
+        label.classList.add('active');
+      } else {
+        label.classList.remove('active');
+      }
+    });
+  }
 
   function updateExperience(direction = null) {
     const experience = experiences[currentExperience];
@@ -73,22 +158,59 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update navigation buttons
     prevBtn.disabled = currentExperience === 0;
     nextBtn.disabled = currentExperience === experiences.length - 1;
+
+    // Update progress indicator
+    updateProgress(currentExperience);
+
+    // Update document title
+    document.title = `The Eaton Fire - ${experience.title}`;
   }
 
   function updateContent(experience) {
-    // Update stage content
-    stage.innerHTML = `
-            <img src="${experience.stage.content}" 
-                 alt="${experience.stage.alt}" 
-                 style="width: 100%; height: 100%; object-fit: cover;">
-        `;
-
     // Update sidebar content
     sidebar.innerHTML = `
-            <h1>${experience.sidebar.title}</h1>
-            <p class="timestamp">${experience.sidebar.timestamp}</p>
-            <p>${experience.sidebar.content}</p>
+      <h1>${experience.sidebar.title}</h1>
+      <p class="timestamp">${experience.sidebar.timestamp}</p>
+      <p>${experience.sidebar.content}</p>
+    `;
+
+    // Prepare content based on experience type
+    let stageContent;
+
+    switch (experience.stage.type) {
+      case 'image':
+        stageContent = `
+          <div class="image-container">
+            <img src="${experience.stage.content}" 
+                 alt="${experience.stage.alt}" 
+                 class="full-image">
+          </div>
         `;
+        break;
+      case 'timeline':
+        stageContent = `<timeline-component></timeline-component>`;
+        break;
+      case 'gaussian-splat':
+        stageContent = `<gaussian-splat-component></gaussian-splat-component>`;
+        break;
+      case 'stories':
+        stageContent = `<stories-component></stories-component>`;
+        break;
+      case 'impact':
+        stageContent = `<impact-component></impact-component>`;
+        break;
+      case 'prevention':
+        stageContent = `<prevention-component></prevention-component>`;
+        break;
+      case 'memorial':
+        stageContent = `<memorial-component></memorial-component>`;
+        break;
+      default:
+        stageContent = `<div class="error-message">Unknown experience type</div>`;
+    }
+
+    // Update stage content
+    stage.innerHTML = stageContent;
   }
 
   // Navigation event listeners
@@ -120,44 +242,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize first experience
   updateExperience();
 
-  // Start experience button
-  const startBtn = document.getElementById('startExperience');
-  const splash = document.getElementById('splash');
-  const experience = document.getElementById('experience');
-
-  startBtn.addEventListener('click', () => {
-    splash.style.display = 'none';
-    experience.style.display = 'block';
-  });
-
-  // Experience Navigation
-  function initExperience() {
-    const enterButton = document.getElementById('enterExperience');
-    const splashPage = document.getElementById('splash');
-    const experiencePage = document.getElementById('experience');
-    const nextBtn = document.getElementById('nextBtn');
-
-    enterButton.addEventListener('click', () => {
-      splashPage.classList.add('hidden');
-      experiencePage.classList.remove('hidden');
-    });
-
-    let currentSlide = 0;
-    const totalSlides = 6;
-
-    nextBtn.addEventListener('click', () => {
-      if (currentSlide < totalSlides - 1) {
-        currentSlide++;
-        if (currentSlide === totalSlides - 1) {
-          nextBtn.classList.add('hidden');
-        }
-        // Add your slide transition logic here
+  // Progress label navigation
+  progressLabels.forEach((label, index) => {
+    label.addEventListener('click', () => {
+      if (index !== currentExperience) {
+        const direction = index > currentExperience ? 'next' : 'prev';
+        currentExperience = index;
+        updateExperience(direction);
       }
     });
-  }
-
-  // Initialize everything
-  initExperience();
+  });
 });
 
 document.addEventListener('DOMContentLoaded', initializeApp); 
