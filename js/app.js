@@ -19,33 +19,7 @@ async function initializeApp() {
   }
 }
 
-// Theme toggle functionality
-function initializeTheme() {
-  const themeToggle = document.querySelector('.theme-toggle');
-  if (!themeToggle) return; // Exit if toggle doesn't exist
-
-  // Function to set theme
-  function setTheme(isDark) {
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  }
-
-  // Set initial theme (default to light)
-  const savedTheme = localStorage.getItem('theme');
-  setTheme(savedTheme === 'dark');
-
-  // Toggle theme on click
-  themeToggle.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    setTheme(!isDark);
-  });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize theme first
-  initializeTheme();
-
-  // Then initialize the rest of the app
   // Mock experiences data
   const experiences = [
     {

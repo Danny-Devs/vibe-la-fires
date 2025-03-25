@@ -30,6 +30,30 @@ class Header extends HTMLElement {
         </div>
       </header>
     `;
+
+    // Initialize theme toggle after content is rendered
+    this.initializeTheme();
+  }
+
+  initializeTheme() {
+    const themeToggle = this.querySelector('.theme-toggle');
+    if (!themeToggle) return;
+
+    // Function to set theme
+    const setTheme = (isDark) => {
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    };
+
+    // Set initial theme (default to light)
+    const savedTheme = localStorage.getItem('theme');
+    setTheme(savedTheme === 'dark');
+
+    // Toggle theme on click
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      setTheme(!isDark);
+    });
   }
 }
 
